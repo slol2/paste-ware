@@ -13,6 +13,7 @@ import me.zeroeightsix.kami.setting.builder.SettingBuilder;
 import me.zeroeightsix.kami.util.Bind;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
+import scala.tools.nsc.transform.patmat.Logic;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -77,6 +78,7 @@ public class Module {
         MISC("Misc", false),
         PLAYER("Player", false),
         MOVEMENT("Movement", false),
+        CHAT("Chat", false),
         HIDDEN("Hidden", true);
 
         boolean hidden;

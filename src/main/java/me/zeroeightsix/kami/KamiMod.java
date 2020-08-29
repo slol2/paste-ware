@@ -54,6 +54,7 @@ public class KamiMod {
     public static final String KAMI_HIRAGANA = "\u304B\u307F";
     public static final String KAMI_KATAKANA = "\u30AB\u30DF";
     public static final String KAMI_KANJI = "\u795E";
+    public static final String NAME_UNICODE = "Cereal-Utility";
 
     private static final String KAMI_CONFIG_NAME_DEFAULT = "KAMIConfig.json";
 
