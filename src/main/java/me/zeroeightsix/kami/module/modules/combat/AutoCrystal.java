@@ -40,8 +40,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-@Module.Info(name = "NutGodCA", category = Module.Category.COMBAT)
-public class NutGodCA extends Module {
+@Module.Info(name = "AutoCrystal", category = Module.Category.COMBAT)
+public class AutoCrystal extends Module {
     private Setting<Boolean> place;
     private Setting<Boolean> raytrace;
     private Setting<Boolean> autoSwitch;
@@ -84,7 +84,7 @@ public class NutGodCA extends Module {
     @EventHandler
     private Listener<PacketEvent.Send> packetListener;
 
-    public NutGodCA() {
+    public AutoCrystal() {
 
         this.place = this.register(Settings.b("Place", true));
         this.raytrace = this.register(Settings.b("RayTrace", false));
@@ -113,21 +113,21 @@ public class NutGodCA extends Module {
         final Packet[] packet = new Packet[1];
         this.packetListener = new Listener<PacketEvent.Send>(event -> {
             packet[0] = event.getPacket();
-            if (packet[0] instanceof CPacketPlayer && NutGodCA.isSpoofingAngles) {
-                ((CPacketPlayer) packet[0]).yaw = (float) NutGodCA.yaw;
-                ((CPacketPlayer) packet[0]).pitch = (float) NutGodCA.pitch;
+            if (packet[0] instanceof CPacketPlayer && AutoCrystal.isSpoofingAngles) {
+                ((CPacketPlayer) packet[0]).yaw = (float) AutoCrystal.yaw;
+                ((CPacketPlayer) packet[0]).pitch = (float) AutoCrystal.pitch;
             }
         }, (Predicate<PacketEvent.Send>[]) new Predicate[0]);
     }
 
     @Override
     public void onUpdate() {
-        final EntityEnderCrystal crystal = (EntityEnderCrystal) NutGodCA.mc.world.loadedEntityList.stream().filter(entity -> entity instanceof EntityEnderCrystal).map(entity -> entity).min(Comparator.comparing(c -> NutGodCA.mc.player.getDistance(c))).orElse(null);
-        if (crystal != null && NutGodCA.mc.player.getDistance((Entity) crystal) <= this.breakRange.getValue()) {
+        final EntityEnderCrystal crystal = (EntityEnderCrystal) AutoCrystal.mc.world.loadedEntityList.stream().filter(entity -> entity instanceof EntityEnderCrystal).map(entity -> entity).min(Comparator.comparing(c -> AutoCrystal.mc.player.getDistance(c))).orElse(null);
+        if (crystal != null && AutoCrystal.mc.player.getDistance((Entity) crystal) <= this.breakRange.getValue()) {
             if (System.nanoTime() / 1000000L - this.breakSystemTime >= 420 - this.attackSpeed.getValue() * 20) {
-                this.lookAtPacket(crystal.posX, crystal.posY, crystal.posZ, (EntityPlayer) NutGodCA.mc.player);
-                NutGodCA.mc.playerController.attackEntity((EntityPlayer) NutGodCA.mc.player, (Entity) crystal);
-                NutGodCA.mc.player.swingArm(EnumHand.MAIN_HAND);
+                this.lookAtPacket(crystal.posX, crystal.posY, crystal.posZ, (EntityPlayer) AutoCrystal.mc.player);
+                AutoCrystal.mc.playerController.attackEntity((EntityPlayer) AutoCrystal.mc.player, (Entity) crystal);
+                AutoCrystal.mc.player.swingArm(EnumHand.MAIN_HAND);
                 this.breakSystemTime = System.nanoTime() / 1000000L;
             }
             if (this.multiPlace.getValue()) {
@@ -141,10 +141,10 @@ public class NutGodCA extends Module {
         } else {
             resetRotation();
         }
-        int crystalSlot = (NutGodCA.mc.player.getHeldItemMainhand().getItem() == Items.END_CRYSTAL) ? NutGodCA.mc.player.inventory.currentItem : -1;
+        int crystalSlot = (AutoCrystal.mc.player.getHeldItemMainhand().getItem() == Items.END_CRYSTAL) ? AutoCrystal.mc.player.inventory.currentItem : -1;
         if (crystalSlot == -1) {
             for (int l = 0; l < 9; ++l) {
-                if (NutGodCA.mc.player.inventory.getStackInSlot(l).getItem() == Items.END_CRYSTAL) {
+                if (AutoCrystal.mc.player.inventory.getStackInSlot(l).getItem() == Items.END_CRYSTAL) {
                     crystalSlot = l;
                     break;
                 }
@@ -162,19 +162,19 @@ public class NutGodCA extends Module {
         BlockPos finalPos = null;
         final List<BlockPos> blocks = this.findCrystalBlocks();
         final List<Entity> entities = new ArrayList<Entity>();
-        entities.addAll((Collection<? extends Entity>) NutGodCA.mc.world.playerEntities.stream().filter(entityPlayer -> !Friends.isFriend(entityPlayer.getName())).collect(Collectors.toList()));
+        entities.addAll((Collection<? extends Entity>) AutoCrystal.mc.world.playerEntities.stream().filter(entityPlayer -> !Friends.isFriend(entityPlayer.getName())).collect(Collectors.toList()));
         double damage = 0.5;
         for (final Entity entity2 : entities) {
-            if (entity2 != NutGodCA.mc.player) {
+            if (entity2 != AutoCrystal.mc.player) {
                 if (((EntityLivingBase) entity2).getHealth() <= 0.0f) {
                     continue;
 
                 }
-                if (NutGodCA.mc.player.getDistanceSq(entity2) > this.enemyRange.getValue() * this.enemyRange.getValue()) {
+                if (AutoCrystal.mc.player.getDistanceSq(entity2) > this.enemyRange.getValue() * this.enemyRange.getValue()) {
                     continue;
                 }
                 for (final BlockPos blockPos : blocks) {
-                    if (!canBlockBeSeen(blockPos) && NutGodCA.mc.player.getDistanceSq(blockPos) > 25.0 && this.raytrace.getValue()) {
+                    if (!canBlockBeSeen(blockPos) && AutoCrystal.mc.player.getDistanceSq(blockPos) > 25.0 && this.raytrace.getValue()) {
                         continue;
                     }
                     final double b = entity2.getDistanceSq(blockPos);
@@ -188,9 +188,9 @@ public class NutGodCA extends Module {
                     if (d <= damage) {
                         continue;
                     }
-                    final double self = calculateDamage(blockPos.x + 0.5, blockPos.y + 1, blockPos.z + 0.5, (Entity) NutGodCA.mc.player);
+                    final double self = calculateDamage(blockPos.x + 0.5, blockPos.y + 1, blockPos.z + 0.5, (Entity) AutoCrystal.mc.player);
                     if (this.antiSui.getValue()) {
-                        if (NutGodCA.mc.player.getHealth() + NutGodCA.mc.player.getAbsorptionAmount() - self <= 7.0) {
+                        if (AutoCrystal.mc.player.getHealth() + AutoCrystal.mc.player.getAbsorptionAmount() - self <= 7.0) {
                             continue;
                         }
                         if (self > d) {
@@ -219,16 +219,16 @@ public class NutGodCA extends Module {
         this.renderEnt = ent;
 
         if (this.place.getValue()) {
-            if (!offhand && NutGodCA.mc.player.inventory.currentItem != crystalSlot) {
+            if (!offhand && AutoCrystal.mc.player.inventory.currentItem != crystalSlot) {
                 if (this.autoSwitch.getValue()) {
-                    NutGodCA.mc.player.inventory.currentItem = crystalSlot;
+                    AutoCrystal.mc.player.inventory.currentItem = crystalSlot;
                     resetRotation();
                     this.switchCooldown = true;
                 }
                 return;
             }
-            this.lookAtPacket(finalPos.x + 0.5, finalPos.y - 0.5, finalPos.z + 0.5, (EntityPlayer) NutGodCA.mc.player);
-            final RayTraceResult result = NutGodCA.mc.world.rayTraceBlocks(new Vec3d(NutGodCA.mc.player.posX, NutGodCA.mc.player.posY + NutGodCA.mc.player.getEyeHeight(), NutGodCA.mc.player.posZ), new Vec3d(finalPos.x + 0.5, finalPos.y - 0.5, finalPos.z + 0.5));
+            this.lookAtPacket(finalPos.x + 0.5, finalPos.y - 0.5, finalPos.z + 0.5, (EntityPlayer) AutoCrystal.mc.player);
+            final RayTraceResult result = AutoCrystal.mc.world.rayTraceBlocks(new Vec3d(AutoCrystal.mc.player.posX, AutoCrystal.mc.player.posY + AutoCrystal.mc.player.getEyeHeight(), AutoCrystal.mc.player.posZ), new Vec3d(finalPos.x + 0.5, finalPos.y - 0.5, finalPos.z + 0.5));
             EnumFacing f;
             if (result == null || result.sideHit == null) {
                 f = EnumFacing.UP;
@@ -240,21 +240,21 @@ public class NutGodCA extends Module {
                 return;
             }
             if (System.nanoTime() / 1000000L - this.placeSystemTime >= this.placeDelay.getValue() * 2) {
-                NutGodCA.mc.player.connection.sendPacket((Packet) new CPacketPlayerTryUseItemOnBlock(finalPos, f, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0.0f, 0.0f, 0.0f));
+                AutoCrystal.mc.player.connection.sendPacket((Packet) new CPacketPlayerTryUseItemOnBlock(finalPos, f, offhand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND, 0.0f, 0.0f, 0.0f));
                 ++this.placements;
                 this.antiStuckSystemTime = System.nanoTime() / 1000000L;
                 this.placeSystemTime = System.nanoTime() / 1000000L;
             }
         }
-        if (NutGodCA.isSpoofingAngles) {
-            if (NutGodCA.togglePitch) {
-                final EntityPlayerSP player = NutGodCA.mc.player;
+        if (AutoCrystal.isSpoofingAngles) {
+            if (AutoCrystal.togglePitch) {
+                final EntityPlayerSP player = AutoCrystal.mc.player;
                 player.rotationPitch += (float) 4.0E-4;
-                NutGodCA.togglePitch = false;
+                AutoCrystal.togglePitch = false;
             } else {
-                final EntityPlayerSP player2 = NutGodCA.mc.player;
+                final EntityPlayerSP player2 = AutoCrystal.mc.player;
                 player2.rotationPitch -= (float) 4.0E-4;
-                NutGodCA.togglePitch = true;
+                AutoCrystal.togglePitch = true;
             }
         }
     }
@@ -299,16 +299,16 @@ public class NutGodCA extends Module {
     private boolean canPlaceCrystal(final BlockPos blockPos) {
         final BlockPos boost = blockPos.add(0, 1, 0);
         final BlockPos boost2 = blockPos.add(0, 2, 0);
-        return (NutGodCA.mc.world.getBlockState(blockPos).getBlock() == Blocks.BEDROCK || NutGodCA.mc.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN) && NutGodCA.mc.world.getBlockState(boost).getBlock() == Blocks.AIR && NutGodCA.mc.world.getBlockState(boost2).getBlock() == Blocks.AIR && NutGodCA.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost)).isEmpty() && NutGodCA.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost2)).isEmpty();
+        return (AutoCrystal.mc.world.getBlockState(blockPos).getBlock() == Blocks.BEDROCK || AutoCrystal.mc.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN) && AutoCrystal.mc.world.getBlockState(boost).getBlock() == Blocks.AIR && AutoCrystal.mc.world.getBlockState(boost2).getBlock() == Blocks.AIR && AutoCrystal.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost)).isEmpty() && AutoCrystal.mc.world.getEntitiesWithinAABB((Class)Entity.class, new AxisAlignedBB(boost2)).isEmpty();
     }
 
     public static BlockPos getPlayerPos() {
-        return new BlockPos(Math.floor(NutGodCA.mc.player.posX), Math.floor(NutGodCA.mc.player.posY), Math.floor(NutGodCA.mc.player.posZ));
+        return new BlockPos(Math.floor(AutoCrystal.mc.player.posX), Math.floor(AutoCrystal.mc.player.posY), Math.floor(AutoCrystal.mc.player.posZ));
     }
 
     private List<BlockPos> findCrystalBlocks() {
         NonNullList positions = NonNullList.create();
-        positions.addAll((Collection)this.getSphere(NutGodCA.getPlayerPos(), this.placeRange.getValue().floatValue(), this.placeRange.getValue(), false, true, 0).stream().filter(this::canPlaceCrystal).collect(Collectors.toList()));
+        positions.addAll((Collection)this.getSphere(AutoCrystal.getPlayerPos(), this.placeRange.getValue().floatValue(), this.placeRange.getValue(), false, true, 0).stream().filter(this::canPlaceCrystal).collect(Collectors.toList()));
         return (List<BlockPos>)positions;
     }
 
@@ -340,7 +340,7 @@ public class NutGodCA extends Module {
         final float damage = (float)(int)((v * v + v) / 2.0 * 7.0 * doubleExplosionSize + 1.0);
         double finald = 1.0;
         if (entity instanceof EntityLivingBase) {
-            finald = getBlastReduction((EntityLivingBase)entity, getDamageMultiplied(damage), new Explosion((World)NutGodCA.mc.world, (Entity)null, posX, posY, posZ, 6.0f, false, true));
+            finald = getBlastReduction((EntityLivingBase)entity, getDamageMultiplied(damage), new Explosion((World)AutoCrystal.mc.world, (Entity)null, posX, posY, posZ, 6.0f, false, true));
         }
         return (float)finald;
     }
@@ -363,7 +363,7 @@ public class NutGodCA extends Module {
     }
 
     private static float getDamageMultiplied(final float damage) {
-        final int diff = NutGodCA.mc.world.getDifficulty().getId();
+        final int diff = AutoCrystal.mc.world.getDifficulty().getId();
         return damage * ((diff == 0) ? 0.0f : ((diff == 2) ? 1.0f : ((diff == 1) ? 0.5f : 1.5f)));
     }
 
@@ -372,33 +372,33 @@ public class NutGodCA extends Module {
     }
 
     public static boolean canBlockBeSeen(final BlockPos blockPos) {
-        return NutGodCA.mc.world.rayTraceBlocks(new Vec3d(NutGodCA.mc.player.posX, NutGodCA.mc.player.posY + NutGodCA.mc.player.getEyeHeight(), NutGodCA.mc.player.posZ), new Vec3d((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ()), false, true, false) == null;
+        return AutoCrystal.mc.world.rayTraceBlocks(new Vec3d(AutoCrystal.mc.player.posX, AutoCrystal.mc.player.posY + AutoCrystal.mc.player.getEyeHeight(), AutoCrystal.mc.player.posZ), new Vec3d((double)blockPos.getX(), (double)blockPos.getY(), (double)blockPos.getZ()), false, true, false) == null;
     }
 
     private static void setYawAndPitch(final float yaw1, final float pitch1) {
-        NutGodCA.yaw = yaw1;
-        NutGodCA.pitch = pitch1;
-        NutGodCA.isSpoofingAngles = true;
+        AutoCrystal.yaw = yaw1;
+        AutoCrystal.pitch = pitch1;
+        AutoCrystal.isSpoofingAngles = true;
     }
 
     private static void resetRotation() {
-        if (NutGodCA.isSpoofingAngles) {
-            NutGodCA.yaw = NutGodCA.mc.player.rotationYaw;
-            NutGodCA.pitch = NutGodCA.mc.player.rotationPitch;
-            NutGodCA.isSpoofingAngles = false;
+        if (AutoCrystal.isSpoofingAngles) {
+            AutoCrystal.yaw = AutoCrystal.mc.player.rotationYaw;
+            AutoCrystal.pitch = AutoCrystal.mc.player.rotationPitch;
+            AutoCrystal.isSpoofingAngles = false;
         }
     }
 
     @Override
     protected void onEnable() {
 
-        if (this.alert.getValue() && NutGodCA.mc.world != null) {
+        if (this.alert.getValue() && AutoCrystal.mc.world != null) {
             Command.sendRawChatMessage("\u00A7aAutoCrystal ON");
         }
     }
 
     public void onDisable() {
-        if (this.alert.getValue() && NutGodCA.mc.world != null) {
+        if (this.alert.getValue() && AutoCrystal.mc.world != null) {
             Command.sendRawChatMessage("\u00A7cAutoCrystal" + ChatFormatting.RED.toString() + "OFF");
         }
         this.render = null;
@@ -406,6 +406,6 @@ public class NutGodCA extends Module {
     }
 
     static {
-        NutGodCA.togglePitch = false;
+        AutoCrystal.togglePitch = false;
     }
 }
