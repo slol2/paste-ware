@@ -39,7 +39,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 
-@Module.Info(name = "CrystalAura", category = Module.Category.COMBAT)
+@Module.Info(name = "AutoCrystal 3", category = Module.Category.COMBAT)
 public class AutoCrystal3 extends Module {
 
     private Setting<Integer> tickPlaceDelay;
@@ -147,7 +147,7 @@ public class AutoCrystal3 extends Module {
             return;
 
         if (this.chatAlert.getValue()) {
-            Command.sendChatMessage("\u00A7 CrystalAura" + ChatFormatting.GREEN.toString() + " ON");
+            Command.sendChatMessage("\u00A7 AutoCrystal 3" + ChatFormatting.GREEN.toString() + " ON");
         }
 
     }
@@ -155,7 +155,7 @@ public class AutoCrystal3 extends Module {
     public void onDisable() {
 
         if (chatAlert.getValue()) {
-            Command.sendChatMessage("\u00A7 CrystalAura" + ChatFormatting.RED.toString() + " OFF");
+            Command.sendChatMessage("\u00A7 AutoCrystal 3" + ChatFormatting.RED.toString() + " OFF");
         }
 
         resetRotation();
