@@ -1,3 +1,3 @@
-#slol owns u niggas
+#dnger owns u niggas
 
-fuck dnger
+fuck slol
