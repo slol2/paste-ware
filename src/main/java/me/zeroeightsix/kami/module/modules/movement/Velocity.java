@@ -1,20 +1,17 @@
-package me.zeroeightsix.kami.module.modules.movement;
 
+package me.zeroeightsix.kami.module.modules.movement;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import me.zeroeightsix.kami.event.KamiEvent;
-import me.zeroeightsix.kami.event.events.EntityEvent;
-import me.zeroeightsix.kami.event.events.PacketEvent;
 import me.zeroeightsix.kami.module.Module;
-import me.zeroeightsix.kami.setting.Setting;
+import me.zeroeightsix.kami.event.events.PacketEvent;
 import me.zeroeightsix.kami.setting.Settings;
+import me.zeroeightsix.kami.setting.Setting;
+import me.zeroeightsix.kami.event.events.EntityEvent;
 import net.minecraft.network.play.server.SPacketEntityVelocity;
 import net.minecraft.network.play.server.SPacketExplosion;
 
-/**
- * Created by 086 on 16/11/2017.
- */
-@Module.Info(name = "Velocity", description = "Modify knockback impact", category = Module.Category.MOVEMENT)
+@Module.Info(name = "Velocity", description = "Modify knockback impact", category = Module.Category.MISC)
 public class Velocity extends Module {
 
     private Setting<Float> horizontal = register(Settings.f("Horizontal", 0));

@@ -53,7 +53,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-@Module.Info(name="Crystal Aura 3", category=Module.Category.COMBAT)
+@Module.Info(name="Crystal Aura", category=Module.Category.COMBAT)
 public class CrystalAura extends Module {
 
     private Setting<Boolean> place = this.register(Settings.b("Place", true));
