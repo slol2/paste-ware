@@ -53,7 +53,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
-@Module.Info(name="Crystal Aura", category=Module.Category.COMBAT)
+@Module.Info(name="AutoCrystal 2", category=Module.Category.COMBAT)
 public class CrystalAura extends Module {
 
     private Setting<Boolean> place = this.register(Settings.b("Place", true));
@@ -437,7 +437,7 @@ public class CrystalAura extends Module {
             this.flag = true;
             ModuleManager.getModuleByName("Fucked Detector").enable();
         }
-        Command.sendChatMessage("we \u00A7l\u00A72gaming\u00A7r");
+        Command.sendChatMessage("&aAutoCrystal2 has been enabled.");
         this.hitDelayCounter = this.hitTickDelay.getValue();
         this.hue = 0f;
     }
@@ -450,6 +450,6 @@ public class CrystalAura extends Module {
         }
         this.renderBlock = null;
         CrystalAura.resetRotation();
-        Command.sendChatMessage("we aint \u00A7l\u00A74gaming\u00A7r no more");
+        Command.sendChatMessage("&cAutoCrystal2 has been disabled.");
     }
 }
