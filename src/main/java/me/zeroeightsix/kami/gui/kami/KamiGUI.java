@@ -205,7 +205,7 @@ public class KamiGUI extends GUI {
         information.setShadow(true);
         information.addTickListener(() -> {
             information.setText("");
-            information.addLine("\u00A7b Cereal Utility Mod\u00A73 " + KamiMod.MODVER);
+            information.addLine("\u00A7bCereal Utility Mod\u00A73 " + KamiMod.MODVER);
             information.addLine("\u00A7b" + Math.round(LagCompensator.INSTANCE.getTickRate()) + Command.SECTIONSIGN() + "3 tps");
             information.addLine("\u00A7b" + Wrapper.getMinecraft().debugFPS + Command.SECTIONSIGN() + "3 fps");
 
