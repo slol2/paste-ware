@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-@Module.Info(name = "AutoCrystal", category = Module.Category.COMBAT)
+@Module.Info(name = "AutoCrystal", category = Module.Category.HIDDEN)
 public class AutoCrystal extends Module {
     private Setting<Boolean> place;
     private Setting<Boolean> raytrace;

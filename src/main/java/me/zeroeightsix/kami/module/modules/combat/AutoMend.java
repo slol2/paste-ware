@@ -21,7 +21,7 @@ import net.minecraft.util.math.Vec3i;
 
 // t r a v i s i s h o t a n d o r e p i c
 
-@Module.Info(name = "Auto Armor Repair", category = Module.Category.COMBAT)
+@Module.Info(name = "Auto Armor Repair", category = Module.Category.HIDDEN)
 public class AutoMend extends Module
 {
 

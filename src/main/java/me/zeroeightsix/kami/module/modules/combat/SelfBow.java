@@ -14,7 +14,7 @@
  import me.zeroeightsix.kami.setting.Setting;
  import me.zeroeightsix.kami.setting.Settings;
 
- @Module.Info(name = "Self Bow", category = Module.Category.COMBAT)
+ @Module.Info(name = "Self Bow", category = Module.Category.HIDDEN)
  public class SelfBow extends Module
  {
      public boolean flag = false;
