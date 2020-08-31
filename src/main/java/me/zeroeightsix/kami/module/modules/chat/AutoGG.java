@@ -160,7 +160,7 @@ public class AutoGG extends Module {
         StringBuilder message = new StringBuilder();
 
         if (toxicMode.getValue()) {
-            message.append("You just got Ez'ed by Yak'y Chan");
+            message.append("You just got Ez'ed by Cereal Utility Mod");
         } else {
             message.append("GG now show me your nipples");
         }
