@@ -2,23 +2,38 @@ package me.zeroeightsix.kami.module.modules.combat;
 
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import me.zeroeightsix.kami.module.ModuleManager;
 import me.zeroeightsix.kami.module.Module;
-import me.zeroeightsix.kami.setting.Setting;
-import me.zeroeightsix.kami.setting.Settings;
-import me.zeroeightsix.kami.event.events.PacketEvent;
+import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.CPacketPlayer;
-import net.minecraft.network.play.client.CPacketUseEntity;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
-@Module.Info(name = "Criticals", category = Module.Category.COMBAT)
+import java.util.function.Predicate;
+
+/***
+ * @author S-B99
+ */
+
+//thanks to obama for writing this all for me <3
+
+@Module.Info(name = "Criticals", category = Module.Category.COMBAT, description = "Always do critical attacks")
 public class Criticals extends Module {
+    @EventHandler
+    private Listener<AttackEntityEvent> attackEntityEventListener;
 
-    private Listener<PacketEvent.Send> sendListener = new Listener<>    (event -> {
-        if (event.getPacket() instanceof CPacketUseEntity) {
-            if(((CPacketUseEntity) event.getPacket()).getAction() == CPacketUseEntity.Action.ATTACK && mc.player.onGround) {
-                mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY + 0.1f, mc.player.posZ, false));
-                mc.player.connection.sendPacket(new CPacketPlayer.Position(mc.player.posX, mc.player.posY, mc.player.posZ, false));
+    public Criticals() {
+        this.attackEntityEventListener = new Listener<AttackEntityEvent>(event -> {
+            if (!Criticals.mc.player.isInWater() && !Criticals.mc.player.isInLava()) {
+                if (Criticals.mc.player.onGround) {
+                    Criticals.mc.player.connection.sendPacket((Packet) new CPacketPlayer.Position(Criticals.mc.player.posX, Criticals.mc.player.posY + 0.1625, Criticals.mc.player.posZ, false));
+                    Criticals.mc.player.connection.sendPacket((Packet) new CPacketPlayer.Position(Criticals.mc.player.posX, Criticals.mc.player.posY, Criticals.mc.player.posZ, false));
+                    Criticals.mc.player.connection.sendPacket((Packet) new CPacketPlayer.Position(Criticals.mc.player.posX, Criticals.mc.player.posY + 4.0E-6, Criticals.mc.player.posZ, false));
+                    Criticals.mc.player.connection.sendPacket((Packet) new CPacketPlayer.Position(Criticals.mc.player.posX, Criticals.mc.player.posY, Criticals.mc.player.posZ, false));
+                    Criticals.mc.player.connection.sendPacket((Packet) new CPacketPlayer.Position(Criticals.mc.player.posX, Criticals.mc.player.posY + 1.0E-6, Criticals.mc.player.posZ, false));
+                    Criticals.mc.player.connection.sendPacket((Packet) new CPacketPlayer.Position(Criticals.mc.player.posX, Criticals.mc.player.posY, Criticals.mc.player.posZ, false));
+                    Criticals.mc.player.connection.sendPacket((Packet) new CPacketPlayer());
+                    Criticals.mc.player.onCriticalHit(event.getTarget());
+                }
             }
-        }
-    });
+        }, (Predicate<AttackEntityEvent>[]) new Predicate[0]);
+    }
 }
