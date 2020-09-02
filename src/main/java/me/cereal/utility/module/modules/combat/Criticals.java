@@ -1,8 +1,8 @@
-package me.zeroeightsix.kami.module.modules.combat;
+package me.cereal.utility.module.modules.combat;
 
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import me.zeroeightsix.kami.module.Module;
+import me.cereal.utility.module.Module;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
