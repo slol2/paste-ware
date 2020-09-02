@@ -15,7 +15,7 @@ import java.util.function.Predicate;
 
 //thanks to obama for writing this all for me <3
 
-@Module.Info(name = "Criticals", category = Module.Category.COMBAT, description = "Always do critical attacks")
+@Module.Info(name = "Criticals", category = Module.Category.COMBAT)
 public class Criticals extends Module {
     @EventHandler
     private Listener<AttackEntityEvent> attackEntityEventListener;
