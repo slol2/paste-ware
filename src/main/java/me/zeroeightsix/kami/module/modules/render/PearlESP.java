@@ -14,6 +14,7 @@ import net.minecraft.util.math.Vec3d;
 @Module.Info(name="PearlESP", category=Module.Category.RENDER)
 public class PearlESP
         extends Module {
+
     private Setting<Integer> r = this.register(Settings.integerBuilder("Red").withMinimum(0).withMaximum(255).withValue(0).build());
     private Setting<Integer> g = this.register(Settings.integerBuilder("Green").withMinimum(0).withMaximum(255).withValue(255).build());
     private Setting<Integer> b = this.register(Settings.integerBuilder("Blue").withMinimum(0).withMaximum(255).withValue(30).build());

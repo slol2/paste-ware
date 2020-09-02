@@ -6,7 +6,7 @@ import me.zeroeightsix.kami.event.events.RenderEvent;
 import me.zeroeightsix.kami.module.Module;
 import me.zeroeightsix.kami.setting.Setting;
 import me.zeroeightsix.kami.setting.Settings;
-import me.zeroeightsix.kami.util.wurstplusTessellator;
+import me.zeroeightsix.kami.util.KamiTessellator;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
@@ -53,21 +53,21 @@ public class Blockhighlight extends Module {
 
     private void drawBlock(final BlockPos blockPos, final int r, final int g, final int b) {
         final Color color = new Color(r, g, b, this.alpha.getValue());
-        wurstplusTessellator.prepare(7);
+        KamiTessellator.prepare(7);
         if (this.renderMode.getValue().equals(RenderMode.UP)) {
-            wurstplusTessellator.drawBox(blockPos, color.getRGB(), 2);
+            KamiTessellator.drawBox(blockPos, color.getRGB(), 2);
         } else if (this.renderMode.getValue().equals(RenderMode.SOLID)) {
-            wurstplusTessellator.drawBox(blockPos, color.getRGB(), 63);
+            KamiTessellator.drawBox(blockPos, color.getRGB(), 63);
         } else if (this.renderMode.getValue().equals(RenderMode.OUTLINE)) {
             IBlockState iBlockState2 = mc.world.getBlockState(this.renderBlock);
             Vec3d interp2 = interpolateEntity((Entity)mc.player, mc.getRenderPartialTicks());
-            wurstplusTessellator.drawBoundingBox(iBlockState2.getSelectedBoundingBox((World)mc.world, this.renderBlock).offset(-interp2.x, -interp2.y, -interp2.z), width.getValue(), r, g, b, this.alpha.getValue());
+            KamiTessellator.drawBoundingBox(iBlockState2.getSelectedBoundingBox((World)mc.world, this.renderBlock).offset(-interp2.x, -interp2.y, -interp2.z), width.getValue(), r, g, b, this.alpha.getValue());
         } else {
             IBlockState iBlockState3 = mc.world.getBlockState(this.renderBlock);
             Vec3d interp3 = interpolateEntity((Entity)mc.player, mc.getRenderPartialTicks());
-            wurstplusTessellator.drawFullBox(iBlockState3.getSelectedBoundingBox((World)mc.world, this.renderBlock).offset(-interp3.x, -interp3.y, -interp3.z), this.renderBlock, width.getValue(), r, g, b, this.alpha.getValue());
+            KamiTessellator.drawFullBox(iBlockState3.getSelectedBoundingBox((World)mc.world, this.renderBlock).offset(-interp3.x, -interp3.y, -interp3.z), this.renderBlock, width.getValue(), r, g, b, this.alpha.getValue());
         }
-        wurstplusTessellator.release();
+        KamiTessellator.release();
     }
 
     @Override
