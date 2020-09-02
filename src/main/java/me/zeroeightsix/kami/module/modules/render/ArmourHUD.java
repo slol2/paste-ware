@@ -51,7 +51,7 @@ public class ArmourHUD extends Module {
                 float green = ((float) is.getMaxDamage() - (float) is.getItemDamage()) / (float) is.getMaxDamage();
                 float red = 1 - green;
                 int dmg = 100 - (int) (red * 100);
-                mc.fontRenderer.drawStringWithShadow(dmg + "", x + 8 - mc.fontRenderer.getStringWidth(dmg + "") / 2, y - 11, ColourHolder.toHex((int) (red * 255), (int) (green * 255), 0));
+                mc.fontRenderer.drawStringWithShadow(dmg + "%", x + 8 - mc.fontRenderer.getStringWidth(dmg + "") / 2, y - 11, ColourHolder.toHex((int) (red * 255), (int) (green * 255), 0));
             }
         }
 

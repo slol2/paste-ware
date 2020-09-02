@@ -126,9 +126,6 @@ public class AutoEZ extends Module {
         if (this.greenMode.getValue()) {
             message.append("> ");
         }
-        if (ModuleManager.getModuleByName("Auto32k").isEnabled()) {
-            message.append("Fastest a32k in the west, brought to you by ");
-        }
         else if (this.toxicMode.getValue().booleanValue()) {
             message.append("You just got fucking rekt son, all because of ");
         } else {

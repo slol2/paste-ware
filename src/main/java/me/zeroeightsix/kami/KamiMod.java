@@ -56,9 +56,9 @@ public class KamiMod {
     public static final String KAMI_KANJI = "\u795E";
     public static final String NAME_UNICODE = "Cereal-Utility";
 
-    private static final String KAMI_CONFIG_NAME_DEFAULT = "KAMIConfig.json";
+    private static final String KAMI_CONFIG_NAME_DEFAULT = "CerealConfig.json";
 
-    public static final Logger log = LogManager.getLogger("Cereal Utiltiy Mod");
+    public static final Logger log = LogManager.getLogger("Cereal Utility Mod");
 
     public static final EventBus EVENT_BUS = new EventManager();
 
@@ -115,7 +115,7 @@ public class KamiMod {
     }
 
     public static String getConfigName() {
-        Path config = Paths.get("KAMILastConfig.txt");
+        Path config = Paths.get("CerealLastConfig.txt");
         String kamiConfigName = KAMI_CONFIG_NAME_DEFAULT;
         try(BufferedReader reader = Files.newBufferedReader(config)) {
             kamiConfigName = reader.readLine();

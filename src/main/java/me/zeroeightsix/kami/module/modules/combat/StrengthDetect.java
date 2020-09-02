@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 
 import static org.lwjgl.opengl.GL11.*;
 
-@Module.Info(name = "Strength Detecter", category = Module.Category.MISC)
+@Module.Info(name = "Strength Detecter", category = Module.Category.COMBAT)
 public class StrengthDetect extends Module {
 
     public Set<EntityPlayer> strengthedPlayers;
