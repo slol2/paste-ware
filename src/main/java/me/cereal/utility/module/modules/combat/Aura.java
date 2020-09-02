@@ -1,13 +1,13 @@
 package me.cereal.utility.module.modules.combat;
 
-import me.zeroeightsix.kami.module.Module;
-import me.zeroeightsix.kami.module.ModuleManager;
-import me.zeroeightsix.kami.module.modules.misc.AutoTool;
-import me.zeroeightsix.kami.setting.Setting;
-import me.zeroeightsix.kami.setting.Settings;
-import me.zeroeightsix.kami.util.EntityUtil;
-import me.zeroeightsix.kami.util.Friends;
-import me.zeroeightsix.kami.util.LagCompensator;
+import me.cereal.utility.module.Module;
+import me.cereal.utility.module.ModuleManager;
+import me.cereal.utility.module.modules.misc.AutoTool;
+import me.cereal.utility.setting.Setting;
+import me.cereal.utility.setting.Settings;
+import me.cereal.utility.util.EntityUtil;
+import me.cereal.utility.util.Friends;
+import me.cereal.utility.util.LagCompensator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
