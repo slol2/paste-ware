@@ -5,8 +5,8 @@ import me.cereal.utility.module.Module;
 /**
  * @author 086
  */
-@Module.Info(name = "Fastplace", category = Module.Category.PLAYER)
-public class Fastplace extends Module {
+@Module.Info(name = "FastPlace", category = Module.Category.PLAYER)
+public class FastPlace extends Module {
 
     @Override
     public void onUpdate() {
