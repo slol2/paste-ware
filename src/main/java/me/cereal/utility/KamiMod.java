@@ -31,6 +31,15 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import org.apache.commons.codec.digest.DigestUtils;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import javax.swing.JOptionPane;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -80,7 +89,27 @@ public class KamiMod {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-
+        String var0 = String.valueOf(System.getenv("os")) + System.getProperty("os.name") + System.getProperty("os.arch") + System.getProperty("os.version") + System.getProperty("user.language") + System.getenv("SystemRoot") + System.getenv("HOMEDRIVE") + System.getenv("PROCESSOR_LEVEL") + System.getenv("PROCESSOR_REVISION") + System.getenv("PROCESSOR_IDENTIFIER") + System.getenv("PROCESSOR_ARCHITECTURE") + System.getenv("PROCESSOR_ARCHITEW6432") + System.getenv("NUMBER_OF_PROCESSORS");
+        String sha512hex = DigestUtils.sha512Hex(var0);
+        String key = DigestUtils.sha512Hex(sha512hex);
+        try {
+            String hwid = "ass.com/hwids/raw";
+            URL pastebin = new URL(hwid.toString());
+            BufferedReader in = new BufferedReader(new InputStreamReader(pastebin.openStream()));
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                if (inputLine.equalsIgnoreCase(key))
+                    verified = true;
+            }
+            if (!verified) {
+                JOptionPane.showMessageDialog(null, "Message zopac the string of numbers copied to your clipboard");
+                StringSelection stringSelection = new StringSelection(key);
+                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                clipboard.setContents(stringSelection, null);
+                System.out.println("cereal = no");
+                Runtime.getRuntime().halt(30);
+            }
+        } catch (Exception exception) {}
     }
 
     @Mod.EventHandler
@@ -204,6 +233,8 @@ public class KamiMod {
             return false;
         }
     }
+
+    public static boolean verified = false;
 
     public static KamiMod getInstance() {
         return INSTANCE;

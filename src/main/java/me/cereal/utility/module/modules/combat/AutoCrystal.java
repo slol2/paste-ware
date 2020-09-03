@@ -394,13 +394,13 @@ public class AutoCrystal extends Module {
     protected void onEnable() {
 
         if (this.alert.getValue() && AutoCrystal.mc.world != null) {
-            Command.sendRawChatMessage("\u00A7aAutoCrystal ON");
+            Command.sendChatMessage("\u00A7aAutoCrystal ON");
         }
     }
 
     public void onDisable() {
         if (this.alert.getValue() && AutoCrystal.mc.world != null) {
-            Command.sendRawChatMessage("\u00A7cAutoCrystal" + ChatFormatting.RED.toString() + "OFF");
+            Command.sendChatMessage("\u00A7cAutoCrystal" + ChatFormatting.RED.toString() + "OFF");
         }
         this.render = null;
         resetRotation();
