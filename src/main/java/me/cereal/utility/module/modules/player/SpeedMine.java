@@ -10,7 +10,6 @@ public class SpeedMine extends Module {
 
     @Override
     public void onUpdate() {
-        if(mc.playerController.curBlockDamageMP >= 0)
-            mc.playerController.curBlockDamageMP = 1;
+        mc.playerController.blockHitDelay = 0;
     }
 }
