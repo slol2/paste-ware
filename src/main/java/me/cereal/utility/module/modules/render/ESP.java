@@ -20,14 +20,10 @@ import static org.lwjgl.opengl.GL11.*;
 @Module.Info(name = "ESP", category = Module.Category.RENDER)
 public class ESP extends Module {
 
-    private Setting<ESPMode> mode = register(Settings.e("Mode", ESPMode.RECTANGLE));
-    private Setting<Boolean> players = register(Settings.b("Players", true));
-    private Setting<Boolean> animals = register(Settings.b("Animals", false));
-    private Setting<Boolean> mobs = register(Settings.b("Mobs", false));
-
-    public enum ESPMode {
-        RECTANGLE
-    }
+    private final Setting<ESPMode> mode = register(Settings.e("Mode", ESPMode.RECTANGLE));
+    private final Setting<Boolean> players = register(Settings.b("Players", true));
+    private final Setting<Boolean> animals = register(Settings.b("Animals", false));
+    private final Setting<Boolean> mobs = register(Settings.b("Mobs", false));
 
     @Override
     public void onWorldRender(RenderEvent event) {
@@ -46,10 +42,10 @@ public class ESP extends Module {
                         .forEach(e -> {
                             GlStateManager.pushMatrix();
                             Vec3d pos = EntityUtil.getInterpolatedPos(e, event.getPartialTicks());
-                            GlStateManager.translate(pos.x-mc.getRenderManager().renderPosX, pos.y-mc.getRenderManager().renderPosY, pos.z-mc.getRenderManager().renderPosZ);
+                            GlStateManager.translate(pos.x - mc.getRenderManager().renderPosX, pos.y - mc.getRenderManager().renderPosY, pos.z - mc.getRenderManager().renderPosZ);
                             GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
                             GlStateManager.rotate(-viewerYaw, 0.0F, 1.0F, 0.0F);
-                            GlStateManager.rotate((float)(isThirdPersonFrontal ? -1 : 1), 1.0F, 0.0F, 0.0F);
+                            GlStateManager.rotate((float) (isThirdPersonFrontal ? -1 : 1), 1.0F, 0.0F, 0.0F);
                             GlStateManager.disableLighting();
                             GlStateManager.depthMask(false);
 
@@ -58,19 +54,19 @@ public class ESP extends Module {
                             GlStateManager.enableBlend();
                             GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
-                            if (e instanceof EntityPlayer) glColor3f(1,1,1);
-                            else if (EntityUtil.isPassive(e)) glColor3f(0.11f,0.9f,0.11f);
-                            else glColor3f(0.9f,.1f,.1f);
+                            if (e instanceof EntityPlayer) glColor3f(1, 1, 1);
+                            else if (EntityUtil.isPassive(e)) glColor3f(0.11f, 0.9f, 0.11f);
+                            else glColor3f(0.9f, .1f, .1f);
 
                             GlStateManager.disableTexture2D();
                             glLineWidth(2f);
-                            glEnable( GL_LINE_SMOOTH );
+                            glEnable(GL_LINE_SMOOTH);
                             glBegin(GL_LINE_LOOP);
                             {
-                                glVertex2d(-e.width/2,0);
-                                glVertex2d(-e.width/2,e.height);
-                                glVertex2d(e.width/2,e.height);
-                                glVertex2d(e.width/2,0);
+                                glVertex2d(-e.width / 2, 0);
+                                glVertex2d(-e.width / 2, e.height);
+                                glVertex2d(e.width / 2, e.height);
+                                glVertex2d(e.width / 2, 0);
                             }
                             glEnd();
 
@@ -86,10 +82,14 @@ public class ESP extends Module {
                 GlStateManager.disableDepth();
                 GlStateManager.enableCull();
                 GlStateManager.glLineWidth(1);
-                glColor3f(1,1,1);
+                glColor3f(1, 1, 1);
                 break;
             default:
                 break;
         }
+    }
+
+    public enum ESPMode {
+        RECTANGLE
     }
 }

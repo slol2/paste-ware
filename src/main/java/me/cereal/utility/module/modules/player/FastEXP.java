@@ -1,11 +1,11 @@
 package me.cereal.utility.module.modules.player;
 
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import me.cereal.utility.event.events.PacketEvent;
 import me.cereal.utility.module.Module;
 import me.cereal.utility.setting.Setting;
 import me.cereal.utility.setting.Settings;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraft.init.Items;
 
 /**
@@ -15,14 +15,14 @@ import net.minecraft.init.Items;
 @Module.Info(name = "FastEXP", category = Module.Category.PLAYER)
 public class FastEXP extends Module {
 
-    private Setting<Boolean> autoThrow = register(Settings.b("Auto Throw", true));
-    private Setting<Boolean> autoSwitch = register(Settings.b("Auto Switch", true));
-    private Setting<Boolean> autoDisable = register(Settings.booleanBuilder("Auto Disable").withValue(false).withVisibility(o -> autoSwitch.getValue()).build());
+    private final Setting<Boolean> autoThrow = register(Settings.b("Auto Throw", true));
+    private final Setting<Boolean> autoSwitch = register(Settings.b("Auto Switch", true));
+    private final Setting<Boolean> autoDisable = register(Settings.booleanBuilder("Auto Disable").withValue(false).withVisibility(o -> autoSwitch.getValue()).build());
 
     private int initHotbarSlot = -1;
 
     @EventHandler
-    private Listener<PacketEvent.Receive> receiveListener = new Listener<>(event ->
+    private final Listener<PacketEvent.Receive> receiveListener = new Listener<>(event ->
     {
         if (mc.player != null && (mc.player.getHeldItemMainhand().getItem() == Items.EXPERIENCE_BOTTLE)) {
             mc.rightClickDelayTimer = 0;

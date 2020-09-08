@@ -52,7 +52,7 @@ public class KamiFrameUI<T extends Frame> extends AbstractComponentUI<Frame> {
 
         TurokGL.turok_Disable(GL_TEXTURE_2D);
 
-        TurokGL.turok_RGBA(128, 128, 128, 240);
+        TurokGL.turok_RGBA(35, 35, 100, 240);
         RenderHelper.drawFilledRectangle(0, 0, component.getWidth(), component.getHeight());
 
         TurokGL.turok_RGBA(0, 0, 0, 255);
@@ -73,7 +73,7 @@ public class KamiFrameUI<T extends Frame> extends AbstractComponentUI<Frame> {
 
         if (component.isPinneable()){
             if (component.isPinned()) {
-                TurokGL.turok_RGBA(128, 128, 128, 150);
+                TurokGL.turok_RGBA(35, 35, 100, 150);
             } else {
                 TurokGL.turok_RGBA(0, 0, 0, 255);
             }

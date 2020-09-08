@@ -6,6 +6,7 @@ import me.cereal.utility.module.Module;
 public class FastFall extends Module {
     public FastFall() {
     }
+
     public void onUpdate() {
         if (mc.player.onGround)
             --mc.player.motionY;

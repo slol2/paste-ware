@@ -14,10 +14,10 @@ import java.util.Random;
 @Module.Info(name = "AntiAFK", category = Module.Category.MISC, description = "Moves in order not to get kicked. (May be invisible client-sided)")
 public class AntiAFK extends Module {
 
-    private Setting<Boolean> swing = register(Settings.b("Swing", true));
-    private Setting<Boolean> turn = register(Settings.b("Turn", true));
+    private final Setting<Boolean> swing = register(Settings.b("Swing", true));
+    private final Setting<Boolean> turn = register(Settings.b("Turn", true));
 
-    private Random random = new Random();
+    private final Random random = new Random();
 
     @Override
     public void onUpdate() {

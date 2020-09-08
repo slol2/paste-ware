@@ -28,15 +28,15 @@ import java.util.Iterator;
 @Module.Info(name = "Aura", category = Module.Category.COMBAT)
 public class Aura extends Module {
 
-    private Setting<Boolean> attackPlayers = register(Settings.b("Players", true));
-    private Setting<Boolean> attackMobs = register(Settings.b("Mobs", false));
-    private Setting<Boolean> attackAnimals = register(Settings.b("Animals", false));
-    private Setting<Double> hitRange = register(Settings.d("Hit Range", 5.5d));
-    private Setting<Boolean> ignoreWalls = register(Settings.b("Ignore Walls", true));
-    private Setting<WaitMode> waitMode = register(Settings.e("Mode", WaitMode.DYNAMIC));
-    private Setting<Integer> waitTick = register(Settings.integerBuilder("Tick Delay").withMinimum(0).withValue(3).withVisibility(o -> waitMode.getValue().equals(WaitMode.STATIC)).build());
-    private Setting<Boolean> switchTo32k = register(Settings.b("32k Switch", true));
-    private Setting<Boolean> onlyUse32k = register(Settings.b("32k Only", false));
+    private final Setting<Boolean> attackPlayers = register(Settings.b("Players", true));
+    private final Setting<Boolean> attackMobs = register(Settings.b("Mobs", false));
+    private final Setting<Boolean> attackAnimals = register(Settings.b("Animals", false));
+    private final Setting<Double> hitRange = register(Settings.d("Hit Range", 5.5d));
+    private final Setting<Boolean> ignoreWalls = register(Settings.b("Ignore Walls", true));
+    private final Setting<WaitMode> waitMode = register(Settings.e("Mode", WaitMode.DYNAMIC));
+    private final Setting<Integer> waitTick = register(Settings.integerBuilder("Tick Delay").withMinimum(0).withValue(3).withVisibility(o -> waitMode.getValue().equals(WaitMode.STATIC)).build());
+    private final Setting<Boolean> switchTo32k = register(Settings.b("32k Switch", true));
+    private final Setting<Boolean> onlyUse32k = register(Settings.b("32k Only", false));
 
     private int waitCounter;
 

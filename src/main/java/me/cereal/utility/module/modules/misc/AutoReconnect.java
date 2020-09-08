@@ -1,11 +1,11 @@
 package me.cereal.utility.module.modules.misc;
 
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import me.cereal.utility.event.events.GuiScreenEvent;
 import me.cereal.utility.module.Module;
 import me.cereal.utility.setting.Setting;
 import me.cereal.utility.setting.Settings;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraft.client.gui.GuiDisconnected;
 import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.multiplayer.ServerData;
@@ -16,20 +16,18 @@ import net.minecraft.client.multiplayer.ServerData;
 @Module.Info(name = "AutoReconnect", description = "Automatically reconnects after being disconnected", category = Module.Category.MISC, alwaysListening = true)
 public class AutoReconnect extends Module {
 
-    private Setting<Integer> seconds = register(Settings.integerBuilder("Seconds").withValue(5).withMinimum(0).build());
     private static ServerData cServer;
-
     @EventHandler
     public Listener<GuiScreenEvent.Closed> closedListener = new Listener<>(event -> {
         if (event.getScreen() instanceof GuiConnecting)
             cServer = mc.currentServerData;
     });
-
     @EventHandler
     public Listener<GuiScreenEvent.Displayed> displayedListener = new Listener<>(event -> {
         if (isEnabled() && event.getScreen() instanceof GuiDisconnected && (cServer != null || mc.currentServerData != null))
             event.setScreen(new KamiGuiDisconnected((GuiDisconnected) event.getScreen()));
     });
+    private final Setting<Integer> seconds = register(Settings.integerBuilder("Seconds").withValue(5).withMinimum(0).build());
 
     private class KamiGuiDisconnected extends GuiDisconnected {
 

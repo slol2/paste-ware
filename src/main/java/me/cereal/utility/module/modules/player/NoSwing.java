@@ -1,9 +1,9 @@
 package me.cereal.utility.module.modules.player;
 
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import me.cereal.utility.event.events.PacketEvent;
 import me.cereal.utility.module.Module;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraft.network.play.client.CPacketAnimation;
 
 /**

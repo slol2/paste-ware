@@ -1,12 +1,12 @@
 package me.cereal.utility.module.modules.misc;
 
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import me.cereal.utility.command.Command;
 import me.cereal.utility.event.events.GuiScreenEvent;
 import me.cereal.utility.module.Module;
 import me.cereal.utility.setting.Setting;
 import me.cereal.utility.setting.Settings;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraft.client.gui.GuiGameOver;
 
 /**
@@ -16,9 +16,9 @@ import net.minecraft.client.gui.GuiGameOver;
 @Module.Info(name = "AutoRespawn", description = "Respawn utility", category = Module.Category.MISC)
 public class AutoRespawn extends Module {
 
-    private Setting<Boolean> respawn = register(Settings.b("Respawn", true));
-    private Setting<Boolean> deathCoords = register(Settings.b("DeathCoords", false));
-    private Setting<Boolean> antiGlitchScreen = register(Settings.b("Anti Glitch Screen", true));
+    private final Setting<Boolean> respawn = register(Settings.b("Respawn", true));
+    private final Setting<Boolean> deathCoords = register(Settings.b("DeathCoords", false));
+    private final Setting<Boolean> antiGlitchScreen = register(Settings.b("Anti Glitch Screen", true));
 
     @EventHandler
     public Listener<GuiScreenEvent.Displayed> listener = new Listener<>(event -> {

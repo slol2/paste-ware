@@ -23,14 +23,14 @@ import static me.cereal.utility.module.modules.combat.AutoCrystal.getPlayerPos;
 @Module.Info(name = "VoidESP", category = Module.Category.RENDER, description = "Show void holes")
 public class VoidESP extends Module {
 
-    private Setting<Integer> range = register(Settings.integerBuilder("Range").withMinimum(1).withValue(8).withMaximum(32).build());
-    private Setting<Integer> activateAtY = register(Settings.integerBuilder("ActivateAtY").withMinimum(1).withValue(32).withMaximum(512).build());
-    private Setting<HoleMode> holeMode = register(Settings.e("HoleMode", HoleMode.SIDES));
-    private Setting<RenderMode> renderMode = register(Settings.e("RenderMode", RenderMode.DOWN));
-    private Setting<Integer> red = register(Settings.integerBuilder("Red").withMinimum(0).withValue(255).withMaximum(255).build());
-    private Setting<Integer> green = register(Settings.integerBuilder("Green").withMinimum(0).withValue(0).withMaximum(255).build());
-    private Setting<Integer> blue = register(Settings.integerBuilder("Blue").withMinimum(0).withValue(0).withMaximum(255).build());
-    private Setting<Integer> alpha = register(Settings.integerBuilder("Alpha").withMinimum(0).withValue(128).withMaximum(255).build());
+    private final Setting<Integer> range = register(Settings.integerBuilder("Range").withMinimum(1).withValue(8).withMaximum(32).build());
+    private final Setting<Integer> activateAtY = register(Settings.integerBuilder("ActivateAtY").withMinimum(1).withValue(32).withMaximum(512).build());
+    private final Setting<HoleMode> holeMode = register(Settings.e("HoleMode", HoleMode.SIDES));
+    private final Setting<RenderMode> renderMode = register(Settings.e("RenderMode", RenderMode.DOWN));
+    private final Setting<Integer> red = register(Settings.integerBuilder("Red").withMinimum(0).withValue(255).withMaximum(255).build());
+    private final Setting<Integer> green = register(Settings.integerBuilder("Green").withMinimum(0).withValue(0).withMaximum(255).build());
+    private final Setting<Integer> blue = register(Settings.integerBuilder("Blue").withMinimum(0).withValue(0).withMaximum(255).build());
+    private final Setting<Integer> alpha = register(Settings.integerBuilder("Alpha").withMinimum(0).withValue(128).withMaximum(255).build());
     private ConcurrentSet<BlockPos> voidHoles;
 
     @Override

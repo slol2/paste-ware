@@ -32,13 +32,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import org.apache.commons.codec.digest.DigestUtils;
+
+import javax.swing.*;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import javax.swing.JOptionPane;
+import java.io.IOException;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -59,9 +61,6 @@ public class KamiMod {
     public static final String MODNAME = "Cereal Utility Mod";
     public static final String MODVER = "0.8";
 
-    public static final String KAMI_HIRAGANA = "\u304B\u307F";
-    public static final String KAMI_KATAKANA = "\u30AB\u30DF";
-    public static final String KAMI_KANJI = "\u795E";
     public static final String NAME_UNICODE = "Cereal-Utility";
 
     private static final String KAMI_CONFIG_NAME_DEFAULT = "CerealConfig.json";
@@ -75,6 +74,7 @@ public class KamiMod {
 
     public KamiGUI guiManager;
     public CommandManager commandManager;
+    public FMLPreInitializationEvent hwid;
     private Setting<JsonObject> guiStateSetting = Settings.custom("gui", new JsonObject(), new Converter<JsonObject, JsonObject>() {
         @Override
         protected JsonObject doForward(JsonObject jsonObject) {
@@ -89,12 +89,12 @@ public class KamiMod {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        String var0 = String.valueOf(System.getenv("os")) + System.getProperty("os.name") + System.getProperty("os.arch") + System.getProperty("os.version") + System.getProperty("user.language") + System.getenv("SystemRoot") + System.getenv("HOMEDRIVE") + System.getenv("PROCESSOR_LEVEL") + System.getenv("PROCESSOR_REVISION") + System.getenv("PROCESSOR_IDENTIFIER") + System.getenv("PROCESSOR_ARCHITECTURE") + System.getenv("PROCESSOR_ARCHITEW6432") + System.getenv("NUMBER_OF_PROCESSORS");
-        String sha512hex = DigestUtils.sha512Hex(var0);
-        String key = DigestUtils.sha512Hex(sha512hex);
+        final String var0 = String.valueOf(System.getenv("os")) + System.getProperty("os.name") + System.getProperty("os.arch") + System.getProperty("os.version") + System.getProperty("user.language") + System.getenv("SystemRoot") + System.getenv("HOMEDRIVE") + System.getenv("PROCESSOR_LEVEL") + System.getenv("PROCESSOR_REVISION") + System.getenv("PROCESSOR_IDENTIFIER") + System.getenv("PROCESSOR_ARCHITECTURE") + System.getenv("PROCESSOR_ARCHITEW6432") + System.getenv("NUMBER_OF_PROCESSORS");
+        final String sha512hex = DigestUtils.sha512Hex(var0);
+        final String key = DigestUtils.sha512Hex(sha512hex);
         try {
-            String hwid = "ass.com/hwids/raw";
-            URL pastebin = new URL(hwid.toString());
+            String fuck = "https://pastebin.com/raw/4AvtD1zC";
+            URL pastebin = new URL(fuck.toString());
             BufferedReader in = new BufferedReader(new InputStreamReader(pastebin.openStream()));
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
@@ -102,14 +102,16 @@ public class KamiMod {
                     verified = true;
             }
             if (!verified) {
-                JOptionPane.showMessageDialog(null, "Message zopac the string of numbers copied to your clipboard");
+                JOptionPane.showMessageDialog(null, "Your key has been copied to your clipboard, please message zopac/freemanatee#7735 the string of numbers.");
                 StringSelection stringSelection = new StringSelection(key);
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                 clipboard.setContents(stringSelection, null);
-                System.out.println("cereal = no");
-                Runtime.getRuntime().halt(30);
+                System.out.println("cereal is no");
             }
         } catch (Exception exception) {}
+        if (!verified) {
+            Runtime.getRuntime().halt(0);
+        }
     }
 
     @Mod.EventHandler

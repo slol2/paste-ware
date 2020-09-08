@@ -84,7 +84,7 @@ public class RootScrollpaneUI extends AbstractComponentUI<Scrollpane> {
                 if (System.currentTimeMillis() - lastScroll < barLife && scrollComponent.liesIn(component) && component.canScrollY()){
                     float alpha = Math.min(1,(barLife-(System.currentTimeMillis() - lastScroll))/100f)/3f;
                     if (dragBar) alpha = 0.4f;
-                    GL11.glColor4f(1,.22f,.22f,alpha);
+                    GL11.glColor4f(0,0,0,alpha);
                     GL11.glDisable(GL11.GL_TEXTURE_2D);
                     int barHeight = 30;
                     double progress = (double) component.getScrolledY() / (double) component.getMaxScrollY();

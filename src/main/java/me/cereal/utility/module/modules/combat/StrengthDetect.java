@@ -1,19 +1,19 @@
 package me.cereal.utility.module.modules.combat;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import me.cereal.utility.command.Command;
+import me.cereal.utility.event.events.RenderEvent;
 import me.cereal.utility.module.Module;
 import me.cereal.utility.util.EntityUtil;
+import me.cereal.utility.util.Wrapper;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
-import me.cereal.utility.event.events.RenderEvent;
-import me.cereal.utility.util.Wrapper;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -34,7 +34,7 @@ public class StrengthDetect extends Module {
             return;
         }
         for (EntityPlayer ent : mc.world.playerEntities) {
-            if (!EntityUtil.isLiving(ent) ||((EntityLivingBase)ent).getHealth() <= 0.0f) continue;
+            if (!EntityUtil.isLiving(ent) || ent.getHealth() <= 0.0f) continue;
             if (ent.isPotionActive(MobEffects.STRENGTH) && !this.strengthedPlayers.contains(ent)) {
                 Command.sendChatMessage("\u00A74[" + ent.getDisplayNameString() + "]\u00A7r is now strong");
                 this.strengthedPlayers.add(ent);
@@ -51,7 +51,7 @@ public class StrengthDetect extends Module {
         try {
             this.renderPlayers.clear();
             for (EntityPlayer ent : mc.world.playerEntities) {
-                if (!EntityUtil.isLiving(ent) ||((EntityLivingBase)ent).getHealth() <= 0.0f) continue;
+                if (!EntityUtil.isLiving(ent) || ent.getHealth() <= 0.0f) continue;
                 this.renderPlayers.add(ent);
             }
             for (EntityPlayer ent : this.strengthedPlayers) {
@@ -60,7 +60,8 @@ public class StrengthDetect extends Module {
                     this.strengthedPlayers.remove(ent);
                 }
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     @Override
@@ -75,10 +76,10 @@ public class StrengthDetect extends Module {
             }
             GlStateManager.pushMatrix();
             Vec3d pos = EntityUtil.getInterpolatedPos(e, event.getPartialTicks());
-            GlStateManager.translate(pos.x-mc.getRenderManager().renderPosX, pos.y-mc.getRenderManager().renderPosY, pos.z-mc.getRenderManager().renderPosZ);
+            GlStateManager.translate(pos.x - mc.getRenderManager().renderPosX, pos.y - mc.getRenderManager().renderPosY, pos.z - mc.getRenderManager().renderPosZ);
             GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
             GlStateManager.rotate(-viewerYaw, 0.0F, 1.0F, 0.0F);
-            GlStateManager.rotate((float)(isThirdPersonFrontal ? -1 : 1), 1.0F, 0.0F, 0.0F);
+            GlStateManager.rotate((float) (isThirdPersonFrontal ? -1 : 1), 1.0F, 0.0F, 0.0F);
             GlStateManager.disableLighting();
             GlStateManager.depthMask(false);
 
@@ -87,17 +88,17 @@ public class StrengthDetect extends Module {
             GlStateManager.enableBlend();
             GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
-            glColor3f(1,0.2f,0.2f);
+            glColor3f(1, 0.2f, 0.2f);
 
             GlStateManager.disableTexture2D();
             glLineWidth(4f);
-            glEnable( GL_LINE_SMOOTH );
+            glEnable(GL_LINE_SMOOTH);
             glBegin(GL_LINE_LOOP);
             {
-                glVertex2d(-e.width/2,0);
-                glVertex2d(-e.width/2,e.height);
-                glVertex2d(e.width/2,e.height);
-                glVertex2d(e.width/2,0);
+                glVertex2d(-e.width / 2, 0);
+                glVertex2d(-e.width / 2, e.height);
+                glVertex2d(e.width / 2, e.height);
+                glVertex2d(e.width / 2, 0);
             }
             glEnd();
 
@@ -113,6 +114,6 @@ public class StrengthDetect extends Module {
         GlStateManager.disableDepth();
         GlStateManager.enableCull();
         GlStateManager.glLineWidth(1);
-        glColor3f(1,1,1);
+        glColor3f(1, 1, 1);
     }
 }

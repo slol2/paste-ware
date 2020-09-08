@@ -10,9 +10,8 @@ import me.cereal.utility.setting.Settings;
 @Module.Info(name = "NoEntityTrace", category = Module.Category.MISC, description = "Blocks entities from stopping you from mining")
 public class NoEntityTrace extends Module {
 
-    private Setting<TraceMode> mode = register(Settings.e("Mode", TraceMode.DYNAMIC));
-
     private static NoEntityTrace INSTANCE;
+    private final Setting<TraceMode> mode = register(Settings.e("Mode", TraceMode.DYNAMIC));
 
     public NoEntityTrace() {
         NoEntityTrace.INSTANCE = this;

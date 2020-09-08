@@ -10,9 +10,9 @@ import net.minecraft.util.math.MathHelper;
  */
 @Module.Info(name = "YawLock", category = Module.Category.PLAYER)
 public class YawLock extends Module {
-    private Setting<Boolean> auto = register(Settings.b("Auto", true));
-    private Setting<Float> yaw = register(Settings.f("Yaw", 180));
-    private Setting<Integer> slice = register(Settings.i("Slice", 8));
+    private final Setting<Boolean> auto = register(Settings.b("Auto", true));
+    private final Setting<Float> yaw = register(Settings.f("Yaw", 180));
+    private final Setting<Integer> slice = register(Settings.i("Slice", 8));
 
     @Override
     public void onUpdate() {

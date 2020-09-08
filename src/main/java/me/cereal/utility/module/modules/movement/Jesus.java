@@ -1,7 +1,5 @@
 package me.cereal.utility.module.modules.movement;
 
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import me.cereal.utility.event.KamiEvent;
 import me.cereal.utility.event.events.AddCollisionBoxToListEvent;
 import me.cereal.utility.event.events.PacketEvent;
@@ -9,6 +7,8 @@ import me.cereal.utility.module.Module;
 import me.cereal.utility.module.ModuleManager;
 import me.cereal.utility.util.EntityUtil;
 import me.cereal.utility.util.Wrapper;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
@@ -24,24 +24,11 @@ import net.minecraft.util.math.MathHelper;
 public class Jesus extends Module {
 
     private static final AxisAlignedBB WATER_WALK_AA = new AxisAlignedBB(0.D, 0.D, 0.D, 1.D, 0.99D, 1.D);
-
-    @Override
-    public void onUpdate() {
-        if (!ModuleManager.isModuleEnabled("Freecam")) {
-            if (EntityUtil.isInWater(mc.player) && !mc.player.isSneaking()) {
-                mc.player.motionY = 0.1;
-                if (mc.player.getRidingEntity() != null && !(mc.player.getRidingEntity() instanceof EntityBoat)) {
-                    mc.player.getRidingEntity().motionY = 0.3;
-                }
-            }
-        }
-    }
-
     @EventHandler
     Listener<AddCollisionBoxToListEvent> addCollisionBoxToListEventListener = new Listener<>((event) -> {
         if (mc.player != null
                 && (event.getBlock() instanceof BlockLiquid)
-                && (EntityUtil.isDrivenByPlayer(event.getEntity()) || event.getEntity()==mc.player)
+                && (EntityUtil.isDrivenByPlayer(event.getEntity()) || event.getEntity() == mc.player)
                 && !(event.getEntity() instanceof EntityBoat)
                 && !mc.player.isSneaking()
                 && mc.player.fallDistance < 3
@@ -53,7 +40,6 @@ public class Jesus extends Module {
             event.cancel();
         }
     });
-
     @EventHandler
     Listener<PacketEvent.Send> packetEventSendListener = new Listener<>(event -> {
         if (event.getEra() == KamiEvent.Era.PRE) {
@@ -67,23 +53,36 @@ public class Jesus extends Module {
     });
 
     @SuppressWarnings("deprecation")
-    private static boolean isAboveLand(Entity entity){
-        if(entity == null) return false;
+    private static boolean isAboveLand(Entity entity) {
+        if (entity == null) return false;
 
         double y = entity.posY - 0.01;
 
-        for(int x = MathHelper.floor(entity.posX); x < MathHelper.ceil(entity.posX); x++)
+        for (int x = MathHelper.floor(entity.posX); x < MathHelper.ceil(entity.posX); x++)
             for (int z = MathHelper.floor(entity.posZ); z < MathHelper.ceil(entity.posZ); z++) {
                 BlockPos pos = new BlockPos(x, MathHelper.floor(y), z);
 
-                if (Wrapper.getWorld().getBlockState(pos).getBlock().isFullBlock(Wrapper.getWorld().getBlockState(pos))) return true;
+                if (Wrapper.getWorld().getBlockState(pos).getBlock().isFullBlock(Wrapper.getWorld().getBlockState(pos)))
+                    return true;
             }
 
         return false;
     }
 
     private static boolean isAboveBlock(Entity entity, BlockPos pos) {
-        return entity.posY  >= pos.getY();
+        return entity.posY >= pos.getY();
+    }
+
+    @Override
+    public void onUpdate() {
+        if (!ModuleManager.isModuleEnabled("Freecam")) {
+            if (EntityUtil.isInWater(mc.player) && !mc.player.isSneaking()) {
+                mc.player.motionY = 0.1;
+                if (mc.player.getRidingEntity() != null && !(mc.player.getRidingEntity() instanceof EntityBoat)) {
+                    mc.player.getRidingEntity().motionY = 0.3;
+                }
+            }
+        }
     }
 
 }

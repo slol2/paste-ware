@@ -10,9 +10,9 @@ import net.minecraft.util.math.MathHelper;
  */
 @Module.Info(name = "Pitch Lock", category = Module.Category.PLAYER)
 public class PitchLock extends Module {
-    private Setting<Boolean> auto = register(Settings.b("Auto", true));
-    private Setting<Float> pitch = register(Settings.f("Pitch", 180));
-    private Setting<Integer> slice = register(Settings.i("Slice", 8));
+    private final Setting<Boolean> auto = register(Settings.b("Auto", true));
+    private final Setting<Float> pitch = register(Settings.f("Pitch", 180));
+    private final Setting<Integer> slice = register(Settings.i("Slice", 8));
 
     @Override
     public void onUpdate() {

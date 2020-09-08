@@ -13,8 +13,8 @@ import net.minecraft.network.play.client.CPacketPlayer;
 @Module.Info(category = Module.Category.MOVEMENT, name = "Flight")
 public class Flight extends Module {
 
-    private Setting<Float> speed = register(Settings.f("Speed", 10));
-    private Setting<FlightMode> mode = register(Settings.e("Mode", FlightMode.VANILLA));
+    private final Setting<Float> speed = register(Settings.f("Speed", 10));
+    private final Setting<FlightMode> mode = register(Settings.e("Mode", FlightMode.VANILLA));
 
     @Override
     protected void onEnable() {

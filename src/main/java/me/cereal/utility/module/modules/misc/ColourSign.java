@@ -1,10 +1,10 @@
 package me.cereal.utility.module.modules.misc;
 
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import me.cereal.utility.command.Command;
 import me.cereal.utility.event.events.GuiScreenEvent;
 import me.cereal.utility.module.Module;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiEditSign;
 import net.minecraft.tileentity.TileEntitySign;
@@ -54,6 +54,7 @@ public class ColourSign extends Module {
             }
             super.actionPerformed(button);
         }
+
         @Override
         protected void keyTyped(char typedChar, int keyCode) throws IOException {
             super.keyTyped(typedChar, keyCode);

@@ -15,7 +15,7 @@ public class NoPacketKick {
     }
 
     public static boolean isEnabled() {
-        return INSTANCE.isEnabled();
+        return isEnabled();
     }
 
 }

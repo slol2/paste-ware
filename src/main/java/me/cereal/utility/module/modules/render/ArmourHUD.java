@@ -16,10 +16,10 @@ import net.minecraft.item.ItemStack;
 @Module.Info(name = "ArmourHUD", category = Module.Category.RENDER)
 public class ArmourHUD extends Module {
 
-    private static RenderItem itemRender = Minecraft.getMinecraft()
+    private static final RenderItem itemRender = Minecraft.getMinecraft()
             .getRenderItem();
 
-    private Setting<Boolean> damage = register(Settings.b("Damage", false));
+    private final Setting<Boolean> damage = register(Settings.b("Damage", false));
 
     @Override
     public void onRender() {

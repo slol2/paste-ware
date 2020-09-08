@@ -1,12 +1,12 @@
 package me.cereal.utility.module.modules.movement;
 
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import me.cereal.utility.module.Module;
 import me.cereal.utility.module.ModuleManager;
 import me.cereal.utility.module.modules.render.Pathfind;
 import me.cereal.utility.setting.Setting;
 import me.cereal.utility.setting.Settings;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraftforge.client.event.InputUpdateEvent;
 
@@ -18,10 +18,10 @@ import static me.cereal.utility.util.EntityUtil.calculateLookAt;
 @Module.Info(name = "AutoWalk", category = Module.Category.MOVEMENT)
 public class AutoWalk extends Module {
 
-    private Setting<AutoWalkMode> mode = register(Settings.e("Mode", AutoWalkMode.FORWARD));
+    private final Setting<AutoWalkMode> mode = register(Settings.e("Mode", AutoWalkMode.FORWARD));
 
     @EventHandler
-    private Listener<InputUpdateEvent> inputUpdateEventListener = new Listener<>(event -> {
+    private final Listener<InputUpdateEvent> inputUpdateEventListener = new Listener<>(event -> {
         switch (mode.getValue()) {
             case FORWARD:
                 event.getMovementInput().moveForward = 1;
@@ -47,7 +47,7 @@ public class AutoWalk extends Module {
         mc.player.rotationPitch = (float) v[1];
     }
 
-    private static enum AutoWalkMode {
+    private enum AutoWalkMode {
         FORWARD, BACKWARDS, PATH
     }
 }

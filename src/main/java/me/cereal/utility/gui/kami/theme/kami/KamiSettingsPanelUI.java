@@ -20,7 +20,7 @@ public class KamiSettingsPanelUI extends AbstractComponentUI<SettingsPanel> {
     public void renderComponent(SettingsPanel component, FontRenderer fontRenderer) {
         super.renderComponent(component, fontRenderer);
 
-        TurokGL.turok_RGBA(128, 2, 128, 150);
+        TurokGL.turok_RGBA(35, 35, 128, 100);
         RenderHelper.drawFilledRectangle(0, 0, component.getWidth(), component.getHeight());
 
         TurokGL.turok_RGBA(0, 0, 0, 255);

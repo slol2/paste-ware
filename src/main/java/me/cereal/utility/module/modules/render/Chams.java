@@ -13,9 +13,9 @@ import net.minecraft.entity.player.EntityPlayer;
 @Module.Info(name = "Chams", category = Module.Category.RENDER, description = "See entities through walls")
 public class Chams extends Module {
 
-    private static Setting<Boolean> players = Settings.b("Players", true);
-    private static Setting<Boolean> animals = Settings.b("Animals", false);
-    private static Setting<Boolean> mobs = Settings.b("Mobs", false);
+    private static final Setting<Boolean> players = Settings.b("Players", true);
+    private static final Setting<Boolean> animals = Settings.b("Animals", false);
+    private static final Setting<Boolean> mobs = Settings.b("Mobs", false);
 
     public Chams() {
         registerAll(players, animals, mobs);
