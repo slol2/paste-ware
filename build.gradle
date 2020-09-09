@@ -1,7 +1,7 @@
 // make folders
 
 task mkdir {
-    group = "kami"
+    group = "cereal"
     doLast {
         mkdir System.getProperty("user.home") + "/.minecraft/mods/1.12.2/"
     }
@@ -10,18 +10,18 @@ task mkdir {
 // delete old versions
 
 task rmOld(type: Delete) {
-    group = "kami"
+    group = "cereal"
     delete fileTree(System.getProperty("user.home") + "/.minecraft/mods/1.12.2/").matching {
-        include "KAMI*-release.jar"
+        include "Cereal-Utility*-release.jar"
     }
 }
 
 // copy file
 
 task copy(type: Copy) {
-    group = "kami"
+    group = "cereal"
     from file("build/libs/")
-    include 'KAMI*-release.jar'
+    include 'Cereal-Utility*-release.jar'
     into file(System.getProperty("user.home") + "/.minecraft/mods/1.12.2/")
 }
 
@@ -62,7 +62,7 @@ minecraft {
     version = project.forgeVersion
     runDir = 'run'
     mappings = project.mcpVersion
-    coreMod = 'me.zeroeightsix.kami.mixin.MixinLoaderForge'
+    coreMod = 'me.cereal.utility.mixin.MixinLoaderForge'
     makeObfSourceJar = false
 }
 
@@ -140,7 +140,7 @@ shadowJar {
 
 mixin {
     defaultObfuscationEnv searge
-    add sourceSets.main, 'mixins.kami.refmap.json'
+    add sourceSets.main, 'mixins.cereal.refmap.json'
 }
 
 reobf {
@@ -153,13 +153,13 @@ reobf {
 jar {
     manifest {
         attributes(
-                'MixinConfigs': 'mixins.kami.json',
+                'MixinConfigs': 'mixins.cereal.json',
                 'tweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
                 'TweakOrder': 0,
                 'FMLCorePluginContainsFMLMod': 'true',
-                'FMLCorePlugin': 'me.zeroeightsix.kami.mixin.MixinLoaderForge',
+                'FMLCorePlugin': 'me.zeroeightsix.cereal.mixin.MixinLoaderForge',
                 'ForceLoadAsMod': 'true',
-                'FMLAT': 'kami_at.cfg'
+                'FMLAT': 'cereal_at.cfg'
         )
     }
 }
