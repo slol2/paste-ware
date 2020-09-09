@@ -102,7 +102,7 @@ public class KamiMod {
                     verified = true;
             }
             if (!verified) {
-                JOptionPane.showMessageDialog(null, "Your key has been copied to your clipboard, please message zopac/freemanatee#7735 the string of numbers.");
+                JOptionPane.showMessageDialog(null, "Your key has been copied to your clipboard, please message dnger#0001 or zopac/freemanatee#7735 the string of numbers to be verified.");
                 StringSelection stringSelection = new StringSelection(key);
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                 clipboard.setContents(stringSelection, null);
