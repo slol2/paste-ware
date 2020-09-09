@@ -1,11 +1,11 @@
 [
   {
     "modid": "cereal",
-    "name": "Cereal Utility Mod",
+    "name": "Cereal Utility",
     "description": "Cereal Shop on Top",
     "version": "0.8",
     "mcversion": "1.12.2",
     "url": "https://discord.gg/2b2tShop",
-    "authorList": ["dnger, slol, zopac"]
+    "authorList": ["dnger, zopac, slol"]
   }
 ]
