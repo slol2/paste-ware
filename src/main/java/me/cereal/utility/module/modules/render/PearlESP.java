@@ -4,7 +4,7 @@ import me.cereal.utility.event.events.RenderEvent;
 import me.cereal.utility.module.Module;
 import me.cereal.utility.setting.Setting;
 import me.cereal.utility.setting.Settings;
-import me.cereal.utility.util.KamiTessellator;
+import me.cereal.utility.util.CerealTessellator;
 import me.cereal.utility.util.MathUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityEnderPearl;
@@ -30,9 +30,9 @@ public class PearlESP
             double posY = vec.y - (double) PearlESP.mc.player.renderOffsetY;
             double posZ = vec.z - (double) PearlESP.mc.player.renderOffsetZ;
             Color color = new Color(this.r.getValue(), this.g.getValue(), this.b.getValue(), this.a.getValue());
-            KamiTessellator.prepare(7);
-            KamiTessellator.drawBox((int) posX, (int) posY, (int) posZ, color.getRGB(), 63);
-            KamiTessellator.release();
+            CerealTessellator.prepare(7);
+            CerealTessellator.drawBox((int) posX, (int) posY, (int) posZ, color.getRGB(), 63);
+            CerealTessellator.release();
         }
     }
 }

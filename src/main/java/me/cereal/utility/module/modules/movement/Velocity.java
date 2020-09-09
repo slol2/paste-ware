@@ -1,6 +1,6 @@
 package me.cereal.utility.module.modules.movement;
 
-import me.cereal.utility.event.KamiEvent;
+import me.cereal.utility.event.CerealEvent;
 import me.cereal.utility.event.events.EntityEvent;
 import me.cereal.utility.event.events.PacketEvent;
 import me.cereal.utility.module.Module;
@@ -19,7 +19,7 @@ public class Velocity extends Module {
 
     @EventHandler
     private final Listener<PacketEvent.Receive> packetEventListener = new Listener<>(event -> {
-        if (event.getEra() == KamiEvent.Era.PRE) {
+        if (event.getEra() == CerealEvent.Era.PRE) {
             if (event.getPacket() instanceof SPacketEntityVelocity) {
                 SPacketEntityVelocity velocity = (SPacketEntityVelocity) event.getPacket();
                 if (velocity.getEntityID() == mc.player.entityId) {

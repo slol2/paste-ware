@@ -1,6 +1,6 @@
 package me.cereal.utility.mixin;
 
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.MixinEnvironment;
@@ -13,11 +13,11 @@ public class MixinLoaderForge implements IFMLLoadingPlugin {
     private static boolean isObfuscatedEnvironment = false;
 
     public MixinLoaderForge() {
-        KamiMod.log.info("KAMI mixins initialized");
+        CerealMod.log.info("Cereal mixins initialized");
         MixinBootstrap.init();
-        Mixins.addConfiguration("mixins.kami.json");
+        Mixins.addConfiguration("mixins.cereal.json");
         MixinEnvironment.getDefaultEnvironment().setObfuscationContext("searge");
-        KamiMod.log.info(MixinEnvironment.getDefaultEnvironment().getObfuscationContext());
+        CerealMod.log.info(MixinEnvironment.getDefaultEnvironment().getObfuscationContext());
     }
 
     @Override

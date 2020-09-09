@@ -1,8 +1,8 @@
 package me.cereal.utility.gui;
 
-import me.cereal.utility.KamiMod;
-import me.cereal.utility.gui.kami.DisplayGuiScreen;
-import me.cereal.utility.gui.kami.KamiGUI;
+import me.cereal.utility.CerealMod;
+import me.cereal.utility.gui.cereal.DisplayGuiScreen;
+import me.cereal.utility.gui.cereal.CerealGUI;
 import me.cereal.utility.gui.rgui.component.Component;
 import me.cereal.utility.gui.rgui.component.container.use.Frame;
 import me.cereal.utility.gui.rgui.component.listen.RenderListener;
@@ -14,7 +14,7 @@ public class UIRenderer {
 	
 	public static void renderAndUpdateFrames(){
 	    if (Wrapper.getMinecraft().currentScreen instanceof DisplayGuiScreen || Wrapper.getMinecraft().gameSettings.showDebugInfo) return;
-		KamiGUI gui = KamiMod.getInstance().getGuiManager();
+		CerealGUI gui = CerealMod.getInstance().getGuiManager();
 
         GL11.glDisable(GL11.GL_TEXTURE_2D);
 		for (Component c : gui.getChildren()){

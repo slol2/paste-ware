@@ -1,12 +1,12 @@
 package me.cereal.utility.event.events;
 
-import me.cereal.utility.event.KamiEvent;
+import me.cereal.utility.event.CerealEvent;
 import net.minecraft.entity.Entity;
 
 /**
  * Created by 086 on 16/11/2017.
  */
-public class EntityEvent extends KamiEvent {
+public class EntityEvent extends CerealEvent {
 
     private Entity entity;
 

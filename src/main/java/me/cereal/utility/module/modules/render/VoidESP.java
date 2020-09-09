@@ -7,7 +7,7 @@ import me.cereal.utility.setting.Setting;
 import me.cereal.utility.setting.Settings;
 import me.cereal.utility.util.BlockInteractionHelper;
 import me.cereal.utility.util.GeometryMasks;
-import me.cereal.utility.util.KamiTessellator;
+import me.cereal.utility.util.CerealTessellator;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import org.lwjgl.opengl.GL11;
@@ -124,13 +124,13 @@ public class VoidESP extends Module {
             return;
         }
 
-        KamiTessellator.prepare(GL11.GL_QUADS);
+        CerealTessellator.prepare(GL11.GL_QUADS);
 
         voidHoles.forEach(blockPos -> {
             drawBlock(blockPos, red.getValue(), green.getValue(), blue.getValue());
         });
 
-        KamiTessellator.release();
+        CerealTessellator.release();
 
     }
 
@@ -143,7 +143,7 @@ public class VoidESP extends Module {
         if (renderMode.getValue().equals(RenderMode.DOWN)) {
             mask = GeometryMasks.Quad.DOWN;
         }
-        KamiTessellator.drawBox(blockPos, color.getRGB(), mask);
+        CerealTessellator.drawBox(blockPos, color.getRGB(), mask);
     }
 
     @Override

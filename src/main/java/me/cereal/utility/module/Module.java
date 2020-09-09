@@ -3,7 +3,7 @@ package me.cereal.utility.module;
 import com.google.common.base.Converter;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 import me.cereal.utility.event.events.RenderEvent;
 import me.cereal.utility.setting.Setting;
 import me.cereal.utility.setting.Settings;
@@ -131,14 +131,14 @@ public class Module {
         enabled.setValue(true);
         onEnable();
         if (!alwaysListening)
-            KamiMod.EVENT_BUS.subscribe(this);
+            CerealMod.EVENT_BUS.subscribe(this);
     }
 
     public void disable() {
         enabled.setValue(false);
         onDisable();
         if (!alwaysListening)
-            KamiMod.EVENT_BUS.unsubscribe(this);
+            CerealMod.EVENT_BUS.unsubscribe(this);
     }
 
     public boolean isDisabled() {
@@ -160,8 +160,8 @@ public class Module {
 
     protected final void setAlwaysListening(boolean alwaysListening) {
         this.alwaysListening = alwaysListening;
-        if (alwaysListening) KamiMod.EVENT_BUS.subscribe(this);
-        if (!alwaysListening && isDisabled()) KamiMod.EVENT_BUS.unsubscribe(this);
+        if (alwaysListening) CerealMod.EVENT_BUS.subscribe(this);
+        if (!alwaysListening && isDisabled()) CerealMod.EVENT_BUS.unsubscribe(this);
     }
 
     /**

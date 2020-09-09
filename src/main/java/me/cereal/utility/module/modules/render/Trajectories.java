@@ -4,7 +4,7 @@ import me.cereal.utility.event.events.RenderEvent;
 import me.cereal.utility.module.Module;
 import me.cereal.utility.util.GeometryMasks;
 import me.cereal.utility.util.HueCycler;
-import me.cereal.utility.util.KamiTessellator;
+import me.cereal.utility.util.CerealTessellator;
 import me.cereal.utility.util.TrajectoryCalculator;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.BlockPos;
@@ -47,10 +47,10 @@ public class Trajectories extends Module {
                         GL11.glDisable(GL11.GL_LIGHTING);
                         GL11.glDisable(GL11.GL_DEPTH_TEST);
                         if (hit != null) {
-                            KamiTessellator.prepare(GL11.GL_QUADS);
+                            CerealTessellator.prepare(GL11.GL_QUADS);
                             GL11.glColor4f(1, 1, 1, .3f);
-                            KamiTessellator.drawBox(hit, 0x33ffffff, GeometryMasks.FACEMAP.get(flightPath.getCollidingTarget().sideHit));
-                            KamiTessellator.release();
+                            CerealTessellator.drawBox(hit, 0x33ffffff, GeometryMasks.FACEMAP.get(flightPath.getCollidingTarget().sideHit));
+                            CerealTessellator.release();
                         }
 
                         if (positions.isEmpty()) return;

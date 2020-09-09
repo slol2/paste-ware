@@ -1,9 +1,9 @@
 package me.cereal.utility.event.events;
 
-import me.cereal.utility.event.KamiEvent;
+import me.cereal.utility.event.CerealEvent;
 import net.minecraft.entity.Entity;
 
-public class TotemPopEvent extends KamiEvent {
+public class TotemPopEvent extends CerealEvent {
 
     private Entity entity;
 

@@ -1,6 +1,6 @@
 package me.cereal.utility.gui.rgui.component;
 
-import me.cereal.utility.gui.kami.DisplayGuiScreen;
+import me.cereal.utility.gui.cereal.DisplayGuiScreen;
 import me.cereal.utility.gui.rgui.GUI;
 import me.cereal.utility.gui.rgui.component.container.Container;
 import me.cereal.utility.gui.rgui.component.listen.*;

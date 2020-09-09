@@ -1,7 +1,7 @@
 package me.cereal.utility.mixin.client;
 
 import me.cereal.utility.command.Command;
-import me.cereal.utility.gui.mc.KamiGuiChat;
+import me.cereal.utility.gui.mc.CerealGuiChat;
 import me.cereal.utility.util.Wrapper;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiTextField;
@@ -27,9 +27,9 @@ public abstract class MixinGuiChat {
 
     @Inject(method = "Lnet/minecraft/client/gui/GuiChat;keyTyped(CI)V", at = @At("RETURN"))
     public void returnKeyTyped(char typedChar, int keyCode, CallbackInfo info) {
-        if (!(Wrapper.getMinecraft().currentScreen instanceof GuiChat) || Wrapper.getMinecraft().currentScreen instanceof KamiGuiChat) return;
+        if (!(Wrapper.getMinecraft().currentScreen instanceof GuiChat) || Wrapper.getMinecraft().currentScreen instanceof CerealGuiChat) return;
         if (inputField.getText().startsWith(Command.getCommandPrefix())) {
-            Wrapper.getMinecraft().displayGuiScreen(new KamiGuiChat(inputField.getText(), historyBuffer, sentHistoryCursor));
+            Wrapper.getMinecraft().displayGuiScreen(new CerealGuiChat(inputField.getText(), historyBuffer, sentHistoryCursor));
         }
     }
 

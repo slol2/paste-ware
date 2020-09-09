@@ -9,7 +9,7 @@ import me.zero.alpine.EventManager;
 import me.cereal.utility.command.Command;
 import me.cereal.utility.command.CommandManager;
 import me.cereal.utility.event.ForgeEventProcessor;
-import me.cereal.utility.gui.kami.KamiGUI;
+import me.cereal.utility.gui.cereal.CerealGUI;
 import me.cereal.utility.gui.rgui.component.AlignedComponent;
 import me.cereal.utility.gui.rgui.component.Component;
 import me.cereal.utility.gui.rgui.component.container.use.Frame;
@@ -54,8 +54,8 @@ import java.util.Optional;
 /**
  * Created by 086 on 7/11/2017.
  */
-@Mod(modid = KamiMod.MODID, name = KamiMod.MODNAME, version = KamiMod.MODVER)
-public class KamiMod {
+@Mod(modid = CerealMod.MODID, name = CerealMod.MODNAME, version = CerealMod.MODVER)
+public class CerealMod {
 
     public static final String MODID = "cereal";
     public static final String MODNAME = "Cereal Utility Mod";
@@ -63,16 +63,16 @@ public class KamiMod {
 
     public static final String NAME_UNICODE = "Cereal-Utility";
 
-    private static final String KAMI_CONFIG_NAME_DEFAULT = "CerealConfig.json";
+    private static final String CEREAL_CONFIG_NAME_DEFAULT = "CerealConfig.json";
 
     public static final Logger log = LogManager.getLogger("Cereal Utility Mod");
 
     public static final EventBus EVENT_BUS = new EventManager();
 
     @Mod.Instance
-    private static KamiMod INSTANCE;
+    private static CerealMod INSTANCE;
 
-    public KamiGUI guiManager;
+    public CerealGUI guiManager;
     public CommandManager commandManager;
     public FMLPreInitializationEvent hwid;
     private Setting<JsonObject> guiStateSetting = Settings.custom("gui", new JsonObject(), new Converter<JsonObject, JsonObject>() {
@@ -102,7 +102,7 @@ public class KamiMod {
                     verified = true;
             }
             if (!verified) {
-                JOptionPane.showMessageDialog(null, "Your key has been copied to your clipboard, please message dnger#0001 or zopac/freemanatee#7735 the string of numbers to be verified.");
+                JOptionPane.showMessageDialog(null, "Your key has been copied to your clipboard, please message dnger#0001 or zopac/freemanatee#7735 the string of numbers.");
                 StringSelection stringSelection = new StringSelection(key);
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
                 clipboard.setContents(stringSelection, null);
@@ -116,7 +116,7 @@ public class KamiMod {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        KamiMod.log.info("\n\nInitializing Cereal Utility Mod " + MODVER);
+        CerealMod.log.info("\n\nInitializing Cereal Utility Mod " + MODVER);
 
         ModuleManager.initialize();
 
@@ -126,7 +126,7 @@ public class KamiMod {
 
         Wrapper.init();
 
-        guiManager = new KamiGUI();
+        guiManager = new CerealGUI();
         guiManager.initializeGUI();
 
         commandManager = new CommandManager();
@@ -134,32 +134,32 @@ public class KamiMod {
         Friends.initFriends();
         SettingsRegister.register("commandPrefix", Command.commandPrefix);
         loadConfiguration();
-        KamiMod.log.info("Settings loaded");
+        CerealMod.log.info("Settings loaded");
 
         ModuleManager.updateLookup(); // generate the lookup table after settings are loaded to make custom module names work
 
         // After settings loaded, we want to let the enabled modules know they've been enabled (since the setting is done through reflection)
         ModuleManager.getModules().stream().filter(Module::isEnabled).forEach(Module::enable);
 
-        KamiMod.log.info("Cereal Utility Mod initialized!\n");
+        CerealMod.log.info("Cereal Utility Mod initialized!\n");
     }
 
     public static String getConfigName() {
         Path config = Paths.get("CerealLastConfig.txt");
-        String kamiConfigName = KAMI_CONFIG_NAME_DEFAULT;
+        String cerealConfigName = CEREAL_CONFIG_NAME_DEFAULT;
         try(BufferedReader reader = Files.newBufferedReader(config)) {
-            kamiConfigName = reader.readLine();
-            if (!isFilenameValid(kamiConfigName)) kamiConfigName = KAMI_CONFIG_NAME_DEFAULT;
+            cerealConfigName = reader.readLine();
+            if (!isFilenameValid(cerealConfigName)) cerealConfigName = CEREAL_CONFIG_NAME_DEFAULT;
         } catch (NoSuchFileException e) {
             try(BufferedWriter writer = Files.newBufferedWriter(config)) {
-                writer.write(KAMI_CONFIG_NAME_DEFAULT);
+                writer.write(CEREAL_CONFIG_NAME_DEFAULT);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return kamiConfigName;
+        return cerealConfigName;
     }
 
     public static void loadConfiguration() {
@@ -171,14 +171,14 @@ public class KamiMod {
     }
 
     public static void loadConfigurationUnsafe() throws IOException {
-        String kamiConfigName = getConfigName();
-        Path kamiConfig = Paths.get(kamiConfigName);
-        if (!Files.exists(kamiConfig)) return;
-        Configuration.loadConfiguration(kamiConfig);
+        String cerealConfigName = getConfigName();
+        Path cerealConfig = Paths.get(cerealConfigName);
+        if (!Files.exists(cerealConfig)) return;
+        Configuration.loadConfiguration(cerealConfig);
 
-        JsonObject gui = KamiMod.INSTANCE.guiStateSetting.getValue();
+        JsonObject gui = CerealMod.INSTANCE.guiStateSetting.getValue();
         for (Map.Entry<String, JsonElement> entry : gui.entrySet()) {
-            Optional<Component> optional = KamiMod.INSTANCE.guiManager.getChildren().stream().filter(component -> component instanceof Frame).filter(component -> ((Frame) component).getTitle().equals(entry.getKey())).findFirst();
+            Optional<Component> optional = CerealMod.INSTANCE.guiManager.getChildren().stream().filter(component -> component instanceof Frame).filter(component -> ((Frame) component).getTitle().equals(entry.getKey())).findFirst();
             if (optional.isPresent()) {
                 JsonObject object = entry.getValue().getAsJsonObject();
                 Frame frame = (Frame) optional.get();
@@ -195,7 +195,7 @@ public class KamiMod {
                 System.err.println("Found GUI config entry for " + entry.getKey() + ", but found no frame with that name");
             }
         }
-        KamiMod.getInstance().getGuiManager().getChildren().stream().filter(component -> (component instanceof Frame) && (((Frame) component).isPinneable()) && component.isVisible()).forEach(component -> component.setOpacity(0f));
+        CerealMod.getInstance().getGuiManager().getChildren().stream().filter(component -> (component instanceof Frame) && (((Frame) component).isPinneable()) && component.isVisible()).forEach(component -> component.setOpacity(0f));
     }
 
     public static void saveConfiguration() {
@@ -208,7 +208,7 @@ public class KamiMod {
 
     public static void saveConfigurationUnsafe() throws IOException {
         JsonObject object = new JsonObject();
-        KamiMod.INSTANCE.guiManager.getChildren().stream().filter(component -> component instanceof Frame).map(component -> (Frame) component).forEach(frame -> {
+        CerealMod.INSTANCE.guiManager.getChildren().stream().filter(component -> component instanceof Frame).map(component -> (Frame) component).forEach(frame -> {
             JsonObject frameObject = new JsonObject();
             frameObject.add("x", new JsonPrimitive(frame.getX()));
             frameObject.add("y", new JsonPrimitive(frame.getY()));
@@ -217,7 +217,7 @@ public class KamiMod {
             frameObject.add("pinned", new JsonPrimitive(frame.isPinned()));
             object.add(frame.getTitle(), frameObject);
         });
-        KamiMod.INSTANCE.guiStateSetting.setValue(object);
+        CerealMod.INSTANCE.guiStateSetting.setValue(object);
 
         Path outputFile = Paths.get(getConfigName());
         if (!Files.exists(outputFile))
@@ -238,11 +238,11 @@ public class KamiMod {
 
     public static boolean verified = false;
 
-    public static KamiMod getInstance() {
+    public static CerealMod getInstance() {
         return INSTANCE;
     }
 
-    public KamiGUI getGuiManager() {
+    public CerealGUI getGuiManager() {
         return guiManager;
     }
 

@@ -1,6 +1,6 @@
 package me.cereal.utility.util;
 
-import me.cereal.utility.gui.kami.KamiGUI;
+import me.cereal.utility.gui.cereal.CerealGUI;
 import me.cereal.utility.gui.rgui.render.font.FontRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -16,7 +16,7 @@ public class Wrapper {
 
     public static void init() {
 //      fontRenderer = new CFontRenderer(new Font("Segoe UI", Font.PLAIN, 19), true, false);
-        fontRenderer = KamiGUI.fontRenderer;
+        fontRenderer = CerealGUI.fontRenderer;
     }
     public static Minecraft getMinecraft() {
         return Minecraft.getMinecraft();

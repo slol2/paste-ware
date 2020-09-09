@@ -1,6 +1,6 @@
 package me.cereal.utility.module.modules;
 
-import me.cereal.utility.gui.kami.DisplayGuiScreen;
+import me.cereal.utility.gui.cereal.DisplayGuiScreen;
 import me.cereal.utility.module.Module;
 import org.lwjgl.input.Keyboard;
 

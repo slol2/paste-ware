@@ -1,6 +1,6 @@
 package me.cereal.utility.util;
 
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 
 import java.util.Random;
 
@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public class ChatTextUtils {
 
-    public static final String CHAT_SUFFIX = " \u23D0 " + KamiMod.NAME_UNICODE;
+    public static final String CHAT_SUFFIX = " \u23D0 " + CerealMod.NAME_UNICODE;
     public static final String SECTIONSIGN = "\u00A7";
 
     private static Random rand = new Random();

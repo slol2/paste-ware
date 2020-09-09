@@ -21,7 +21,7 @@ public class ColourSign extends Module {
     @EventHandler
     public Listener<GuiScreenEvent.Displayed> eventListener = new Listener<>(event -> {
         if (event.getScreen() instanceof GuiEditSign && isEnabled()) {
-            event.setScreen(new KamiGuiEditSign(((GuiEditSign) event.getScreen()).tileSign));
+            event.setScreen(new CerealGuiEditSign(((GuiEditSign) event.getScreen()).tileSign));
         }
     });
 
@@ -35,10 +35,10 @@ public class ColourSign extends Module {
 //        }
 //    });
 
-    private class KamiGuiEditSign extends GuiEditSign {
+    private class CerealGuiEditSign extends GuiEditSign {
 
 
-        public KamiGuiEditSign(TileEntitySign teSign) {
+        public CerealGuiEditSign(TileEntitySign teSign) {
             super(teSign);
         }
 

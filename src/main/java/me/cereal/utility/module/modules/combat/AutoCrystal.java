@@ -11,7 +11,7 @@ import me.cereal.utility.setting.Setting;
 import me.cereal.utility.setting.Settings;
 import me.cereal.utility.util.EntityUtil;
 import me.cereal.utility.util.Friends;
-import me.cereal.utility.util.KamiTessellator;
+import me.cereal.utility.util.CerealTessellator;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -35,7 +35,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Module.Info(name = "AutoCrystal", category = Module.Category.COMBAT)
@@ -333,19 +332,19 @@ public class AutoCrystal extends Module {
             int g = (rgb >> 8) & 0xFF;
             int b = rgb & 0xFF;
             if (rainbow.getValue()) {
-                KamiTessellator.prepare(7);
-                KamiTessellator.drawBox(this.render, r, g, b, 77, 63);
-                KamiTessellator.release();
-                KamiTessellator.prepare(7);
-                KamiTessellator.drawBoundingBoxBlockPos(this.render, 1.00f, r, g, b, 255);
+                CerealTessellator.prepare(7);
+                CerealTessellator.drawBox(this.render, r, g, b, 77, 63);
+                CerealTessellator.release();
+                CerealTessellator.prepare(7);
+                CerealTessellator.drawBoundingBoxBlockPos(this.render, 1.00f, r, g, b, 255);
             } else {
-                KamiTessellator.prepare(7);
-                KamiTessellator.drawBox(this.render, this.Red.getValue(), this.Green.getValue(), this.Blue.getValue(), 77, 63);
-                KamiTessellator.release();
-                KamiTessellator.prepare(7);
-                KamiTessellator.drawBoundingBoxBlockPos(this.render, 1.00f, this.Red.getValue(), this.Green.getValue(), this.Blue.getValue(), 244);
+                CerealTessellator.prepare(7);
+                CerealTessellator.drawBox(this.render, this.Red.getValue(), this.Green.getValue(), this.Blue.getValue(), 77, 63);
+                CerealTessellator.release();
+                CerealTessellator.prepare(7);
+                CerealTessellator.drawBoundingBoxBlockPos(this.render, 1.00f, this.Red.getValue(), this.Green.getValue(), this.Blue.getValue(), 244);
             }
-            KamiTessellator.release();
+            CerealTessellator.release();
         }
 
     }

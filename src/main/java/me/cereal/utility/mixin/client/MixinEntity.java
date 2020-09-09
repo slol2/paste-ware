@@ -1,6 +1,6 @@
 package me.cereal.utility.mixin.client;
 
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 import me.cereal.utility.event.events.EntityEvent;
 import me.cereal.utility.module.modules.movement.SafeWalk;
 import net.minecraft.entity.Entity;
@@ -17,7 +17,7 @@ public class MixinEntity {
     @Redirect(method = "applyEntityCollision", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;addVelocity(DDD)V"))
     public void addVelocity(Entity entity, double x, double y, double z) {
         EntityEvent.EntityCollision entityCollisionEvent = new EntityEvent.EntityCollision(entity, x, y, z);
-        KamiMod.EVENT_BUS.post(entityCollisionEvent);
+        CerealMod.EVENT_BUS.post(entityCollisionEvent);
         if (entityCollisionEvent.isCancelled()) return;
 
         entity.motionX += x;

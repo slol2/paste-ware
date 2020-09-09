@@ -1,6 +1,6 @@
 package me.cereal.utility.mixin.client;
 
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 import me.cereal.utility.event.events.PlayerMoveEvent;
 import me.cereal.utility.module.ModuleManager;
 import net.minecraft.client.Minecraft;
@@ -36,7 +36,7 @@ public class MixinEntityPlayerSP {
 //        double y = args.get(2);
 //        double z = args.get(3);
 //        PlayerMoveEvent event = new PlayerMoveEvent(type, x, y, z);
-//        KamiMod.EVENT_BUS.post(event);
+//        CerealMod.EVENT_BUS.post(event);
 //        if (event.isCancelled()) {
 //            x = y = z = 0;
 //        } else {
@@ -52,7 +52,7 @@ public class MixinEntityPlayerSP {
     @Inject(method = "move", at = @At("HEAD"), cancellable = true)
     public void move(MoverType type, double x, double y, double z, CallbackInfo info) {
         PlayerMoveEvent event = new PlayerMoveEvent(type, x, y, z);
-        KamiMod.EVENT_BUS.post(event);
+        CerealMod.EVENT_BUS.post(event);
         if (event.isCancelled()) info.cancel();
     }
 

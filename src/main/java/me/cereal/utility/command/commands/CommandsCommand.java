@@ -1,6 +1,6 @@
 package me.cereal.utility.command.commands;
 
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 import me.cereal.utility.command.Command;
 import me.cereal.utility.command.syntax.SyntaxChunk;
 
@@ -17,7 +17,7 @@ public class CommandsCommand extends Command {
 
     @Override
     public void call(String[] args) {
-        KamiMod.getInstance().getCommandManager().getCommands().stream().sorted(Comparator.comparing(command -> command.getLabel())).forEach(command ->
+        CerealMod.getInstance().getCommandManager().getCommands().stream().sorted(Comparator.comparing(command -> command.getLabel())).forEach(command ->
             Command.sendChatMessage("&7" + Command.getCommandPrefix() + command.getLabel() + "&r ~ &8" + command.getDescription())
         );
     }

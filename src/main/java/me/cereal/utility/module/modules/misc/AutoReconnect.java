@@ -25,16 +25,16 @@ public class AutoReconnect extends Module {
     @EventHandler
     public Listener<GuiScreenEvent.Displayed> displayedListener = new Listener<>(event -> {
         if (isEnabled() && event.getScreen() instanceof GuiDisconnected && (cServer != null || mc.currentServerData != null))
-            event.setScreen(new KamiGuiDisconnected((GuiDisconnected) event.getScreen()));
+            event.setScreen(new CerealGuiDisconnected((GuiDisconnected) event.getScreen()));
     });
     private final Setting<Integer> seconds = register(Settings.integerBuilder("Seconds").withValue(5).withMinimum(0).build());
 
-    private class KamiGuiDisconnected extends GuiDisconnected {
+    private class CerealGuiDisconnected extends GuiDisconnected {
 
         int millis = seconds.getValue() * 1000;
         long cTime;
 
-        public KamiGuiDisconnected(GuiDisconnected disconnected) {
+        public CerealGuiDisconnected(GuiDisconnected disconnected) {
             super(disconnected.parentScreen, disconnected.reason, disconnected.message);
             cTime = System.currentTimeMillis();
         }

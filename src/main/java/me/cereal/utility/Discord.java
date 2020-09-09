@@ -14,7 +14,7 @@ public class Discord {
     public static boolean connected;
 
     public static void start() {
-        KamiMod.log.info("Starting Discord RPC");
+        CerealMod.log.info("Starting Discord RPC");
         if (connected)
             return;
         connected = true;
@@ -23,11 +23,11 @@ public class Discord {
         presence.startTimestamp = System.currentTimeMillis() / 1000L;
         setRpcFromSettings();
         (new Thread(Discord::setRpcFromSettingsNonInt, "Discord-RPC-Callback-Handler")).start();
-        KamiMod.log.info("Discord RPC initialised successfully");
+        CerealMod.log.info("Discord RPC initialised successfully");
     }
 
     public static void end() {
-        KamiMod.log.info("Shutting down Discord RPC...");
+        CerealMod.log.info("Shutting down Discord RPC...");
         connected = false;
         rpc.Discord_Shutdown();
     }
