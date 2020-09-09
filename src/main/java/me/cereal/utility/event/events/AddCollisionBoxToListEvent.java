@@ -1,6 +1,6 @@
 package me.cereal.utility.event.events;
 
-import me.cereal.utility.event.KamiEvent;
+import me.cereal.utility.event.CerealEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by 086 on 11/12/2017.
  */
-public class AddCollisionBoxToListEvent extends KamiEvent {
+public class AddCollisionBoxToListEvent extends CerealEvent {
     private final Block block;
     private final IBlockState state;
     private final World world;

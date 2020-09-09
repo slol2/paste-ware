@@ -1,15 +1,15 @@
 package me.cereal.utility.event;
 
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 import me.cereal.utility.command.Command;
 import me.cereal.utility.command.commands.PeekCommand;
 import me.cereal.utility.event.events.DisplaySizeChangedEvent;
 import me.cereal.utility.gui.UIRenderer;
-import me.cereal.utility.gui.kami.KamiGUI;
+import me.cereal.utility.gui.cereal.CerealGUI;
 import me.cereal.utility.gui.rgui.component.container.use.Frame;
 import me.cereal.utility.module.ModuleManager;
 import me.cereal.utility.module.modules.render.BossStack;
-import me.cereal.utility.util.KamiTessellator;
+import me.cereal.utility.util.CerealTessellator;
 import me.cereal.utility.util.Wrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
@@ -41,16 +41,16 @@ public class ForgeEventProcessor {
     @SubscribeEvent
     public void onUpdate(LivingEvent.LivingUpdateEvent event) {
         if (event.isCanceled()) return;
-//        KamiMod.EVENT_BUS.post(new UpdateEvent());
+//        CerealMod.EVENT_BUS.post(new UpdateEvent());
 
         if (Minecraft.getMinecraft().displayWidth != displayWidth || Minecraft.getMinecraft().displayHeight != displayHeight) {
-            KamiMod.EVENT_BUS.post(new DisplaySizeChangedEvent());
+            CerealMod.EVENT_BUS.post(new DisplaySizeChangedEvent());
             displayWidth = Minecraft.getMinecraft().displayWidth;
             displayHeight = Minecraft.getMinecraft().displayHeight;
 
-            KamiMod.getInstance().getGuiManager().getChildren().stream()
+            CerealMod.getInstance().getGuiManager().getChildren().stream()
                     .filter(component -> component instanceof Frame)
-                    .forEach(component -> KamiGUI.dock((Frame) component));
+                    .forEach(component -> CerealGUI.dock((Frame) component));
         }
 
         if (PeekCommand.sb != null) {
@@ -68,7 +68,7 @@ public class ForgeEventProcessor {
     public void onTick(TickEvent.ClientTickEvent event) {
         if (Wrapper.getPlayer() == null) return;
         ModuleManager.onUpdate();
-        KamiMod.getInstance().getGuiManager().callTick(KamiMod.getInstance().getGuiManager());
+        CerealMod.getInstance().getGuiManager().callTick(CerealMod.getInstance().getGuiManager());
     }
 
     @SubscribeEvent
@@ -97,7 +97,7 @@ public class ForgeEventProcessor {
             GL11.glPushMatrix();
             UIRenderer.renderAndUpdateFrames();
             GL11.glPopMatrix();
-            KamiTessellator.releaseGL();
+            CerealTessellator.releaseGL();
         } else if (event.getType() == RenderGameOverlayEvent.ElementType.BOSSINFO && ModuleManager.isModuleEnabled("BossStack")) {
             BossStack.render(event);
         }
@@ -117,7 +117,7 @@ public class ForgeEventProcessor {
                 Wrapper.getMinecraft().ingameGUI.getChatGUI().addToSentMessages(event.getMessage());
 
                 if (event.getMessage().length() > 1)
-                    KamiMod.getInstance().commandManager.callCommand(event.getMessage().substring(Command.getCommandPrefix().length() - 1));
+                    CerealMod.getInstance().commandManager.callCommand(event.getMessage().substring(Command.getCommandPrefix().length() - 1));
                 else
                     Command.sendChatMessage("Please enter a command.");
             } catch (Exception e) {
@@ -130,62 +130,62 @@ public class ForgeEventProcessor {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onPlayerDrawn(RenderPlayerEvent.Pre event) {
-        KamiMod.EVENT_BUS.post(event);
+        CerealMod.EVENT_BUS.post(event);
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onPlayerDrawn(RenderPlayerEvent.Post event) {
-        KamiMod.EVENT_BUS.post(event);
+        CerealMod.EVENT_BUS.post(event);
     }
 
     @SubscribeEvent()
     public void onChunkLoaded(ChunkEvent.Load event) {
-        KamiMod.EVENT_BUS.post(event);
+        CerealMod.EVENT_BUS.post(event);
     }
 
     @SubscribeEvent()
     public void onChunkLoaded(ChunkEvent.Unload event) {
-        KamiMod.EVENT_BUS.post(event);
+        CerealMod.EVENT_BUS.post(event);
     }
 
     @SubscribeEvent
     public void onInputUpdate(InputUpdateEvent event) {
-        KamiMod.EVENT_BUS.post(event);
+        CerealMod.EVENT_BUS.post(event);
     }
 
     @SubscribeEvent
     public void onLivingEntityUseItemEventTick(LivingEntityUseItemEvent.Start entityUseItemEvent) {
-        KamiMod.EVENT_BUS.post(entityUseItemEvent);
+        CerealMod.EVENT_BUS.post(entityUseItemEvent);
     }
 
     @SubscribeEvent
     public void onLivingDamageEvent(LivingDamageEvent event) {
-        KamiMod.EVENT_BUS.post(event);
+        CerealMod.EVENT_BUS.post(event);
     }
 
     @SubscribeEvent
     public void onEntityJoinWorldEvent(EntityJoinWorldEvent entityJoinWorldEvent) {
-        KamiMod.EVENT_BUS.post(entityJoinWorldEvent);
+        CerealMod.EVENT_BUS.post(entityJoinWorldEvent);
     }
 
     @SubscribeEvent
     public void onPlayerPush(PlayerSPPushOutOfBlocksEvent event) {
-        KamiMod.EVENT_BUS.post(event);
+        CerealMod.EVENT_BUS.post(event);
     }
 
     @SubscribeEvent
     public void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
-        KamiMod.EVENT_BUS.post(event);
+        CerealMod.EVENT_BUS.post(event);
     }
 
     @SubscribeEvent
     public void onAttackEntity(AttackEntityEvent entityEvent) {
-        KamiMod.EVENT_BUS.post(entityEvent);
+        CerealMod.EVENT_BUS.post(entityEvent);
     }
 
     @SubscribeEvent
     public void onRenderBlockOverlay(RenderBlockOverlayEvent event) {
-        KamiMod.EVENT_BUS.post(event);
+        CerealMod.EVENT_BUS.post(event);
     }
 
 }

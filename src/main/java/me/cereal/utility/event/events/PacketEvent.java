@@ -1,12 +1,12 @@
 package me.cereal.utility.event.events;
 
-import me.cereal.utility.event.KamiEvent;
+import me.cereal.utility.event.CerealEvent;
 import net.minecraft.network.Packet;
 
 /**
  * Created by 086 on 13/11/2017.
  */
-public class PacketEvent extends KamiEvent {
+public class PacketEvent extends CerealEvent {
 
     private final Packet packet;
 

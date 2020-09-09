@@ -1,12 +1,12 @@
 package me.cereal.utility.event.events;
 
-import me.cereal.utility.event.KamiEvent;
+import me.cereal.utility.event.CerealEvent;
 import net.minecraft.entity.MoverType;
 
 /**
  * @author 086
  */
-public class PlayerMoveEvent extends KamiEvent {
+public class PlayerMoveEvent extends CerealEvent {
 
     private MoverType type;
     private double x, y, z;
