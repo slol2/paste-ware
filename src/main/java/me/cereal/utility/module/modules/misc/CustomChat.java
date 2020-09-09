@@ -14,14 +14,14 @@ import net.minecraft.network.play.client.CPacketChatMessage;
 @Module.Info(name = "CustomChat", category = Module.Category.MISC, description = "Modifies your chat messages")
 public class CustomChat extends Module {
 
-    private final String KAMI_SUFFIX = " \u23D0 \u1D0B\u1D00\u1D0D\u026A";
+    private final String CEREAL_SUFFIX = " \u23D0 \u1D0B\u1D00\u1D0D\u026A";
     private final Setting<Boolean> commands = register(Settings.b("Commands", false));
     @EventHandler
     public Listener<PacketEvent.Send> listener = new Listener<>(event -> {
         if (event.getPacket() instanceof CPacketChatMessage) {
             String s = ((CPacketChatMessage) event.getPacket()).getMessage();
             if (s.startsWith("/") && !commands.getValue()) return;
-            s += KAMI_SUFFIX;
+            s += CEREAL_SUFFIX;
             if (s.length() >= 256) s = s.substring(0, 256);
             ((CPacketChatMessage) event.getPacket()).message = s;
         }

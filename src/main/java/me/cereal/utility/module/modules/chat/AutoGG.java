@@ -2,7 +2,7 @@ package me.cereal.utility.module.modules.chat;
 
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 import me.cereal.utility.event.events.PacketEvent;
 import me.cereal.utility.module.Module;
 import me.cereal.utility.setting.Setting;
@@ -170,7 +170,7 @@ public class AutoGG extends Module {
 
         if (clientName.getValue()) {
             message.append(" ");
-            message.append(KamiMod.NAME_UNICODE);
+            message.append(CerealMod.NAME_UNICODE);
             message.append(" ");
         }
 

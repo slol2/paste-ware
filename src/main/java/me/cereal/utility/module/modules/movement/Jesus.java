@@ -1,6 +1,6 @@
 package me.cereal.utility.module.modules.movement;
 
-import me.cereal.utility.event.KamiEvent;
+import me.cereal.utility.event.CerealEvent;
 import me.cereal.utility.event.events.AddCollisionBoxToListEvent;
 import me.cereal.utility.event.events.PacketEvent;
 import me.cereal.utility.module.Module;
@@ -42,7 +42,7 @@ public class Jesus extends Module {
     });
     @EventHandler
     Listener<PacketEvent.Send> packetEventSendListener = new Listener<>(event -> {
-        if (event.getEra() == KamiEvent.Era.PRE) {
+        if (event.getEra() == CerealEvent.Era.PRE) {
             if (event.getPacket() instanceof CPacketPlayer) {
                 if (EntityUtil.isAboveWater(mc.player, true) && !EntityUtil.isInWater(mc.player) && !isAboveLand(mc.player)) {
                     int ticks = mc.player.ticksExisted % 2;

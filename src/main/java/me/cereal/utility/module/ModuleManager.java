@@ -1,11 +1,11 @@
 package me.cereal.utility.module;
 
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 import me.cereal.utility.event.events.RenderEvent;
 import me.cereal.utility.module.modules.ClickGUI;
 import me.cereal.utility.util.ClassFinder;
 import me.cereal.utility.util.EntityUtil;
-import me.cereal.utility.util.KamiTessellator;
+import me.cereal.utility.util.CerealTessellator;
 import me.cereal.utility.util.Wrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -54,7 +54,7 @@ public class ModuleManager {
                 System.err.println("Couldn't initiate module " + aClass.getSimpleName() + "! Err: " + e.getClass().getSimpleName() + ", message: " + e.getMessage());
             }
         });
-        KamiMod.log.info("Modules initialised");
+        CerealMod.log.info("Modules initialised");
         getModules().sort(Comparator.comparing(Module::getName));
     }
 
@@ -67,7 +67,7 @@ public class ModuleManager {
     }
 
     public static void onWorldRender(RenderWorldLastEvent event) {
-        Minecraft.getMinecraft().profiler.startSection("kami");
+        Minecraft.getMinecraft().profiler.startSection("cereal");
 
         Minecraft.getMinecraft().profiler.startSection("setup");
 //        GlStateManager.pushMatrix();
@@ -81,7 +81,7 @@ public class ModuleManager {
         GlStateManager.glLineWidth(1f);
         Vec3d renderPos = EntityUtil.getInterpolatedPos(Wrapper.getPlayer(), event.getPartialTicks());
 
-        RenderEvent e = new RenderEvent(KamiTessellator.INSTANCE, renderPos);
+        RenderEvent e = new RenderEvent(CerealTessellator.INSTANCE, renderPos);
         e.resetTranslation();
         Minecraft.getMinecraft().profiler.endSection();
 
@@ -101,7 +101,7 @@ public class ModuleManager {
         GlStateManager.enableDepth();
         GlStateManager.enableCull();
 //        GlStateManager.popMatrix();
-        KamiTessellator.releaseGL();
+        CerealTessellator.releaseGL();
         Minecraft.getMinecraft().profiler.endSection();
 
         Minecraft.getMinecraft().profiler.endSection();

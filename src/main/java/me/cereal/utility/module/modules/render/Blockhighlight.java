@@ -4,14 +4,13 @@ import me.cereal.utility.event.events.RenderEvent;
 import me.cereal.utility.module.Module;
 import me.cereal.utility.setting.Setting;
 import me.cereal.utility.setting.Settings;
-import me.cereal.utility.util.KamiTessellator;
+import me.cereal.utility.util.CerealTessellator;
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 
 import java.awt.*;
 
@@ -57,21 +56,21 @@ public class Blockhighlight extends Module {
 
     private void drawBlock(final BlockPos blockPos, final int r, final int g, final int b) {
         final Color color = new Color(r, g, b, this.alpha.getValue());
-        KamiTessellator.prepare(7);
+        CerealTessellator.prepare(7);
         if (this.renderMode.getValue().equals(RenderMode.UP)) {
-            KamiTessellator.drawBox(blockPos, color.getRGB(), 2);
+            CerealTessellator.drawBox(blockPos, color.getRGB(), 2);
         } else if (this.renderMode.getValue().equals(RenderMode.SOLID)) {
-            KamiTessellator.drawBox(blockPos, color.getRGB(), 63);
+            CerealTessellator.drawBox(blockPos, color.getRGB(), 63);
         } else if (this.renderMode.getValue().equals(RenderMode.OUTLINE)) {
             IBlockState iBlockState2 = mc.world.getBlockState(this.renderBlock);
             Vec3d interp2 = interpolateEntity(mc.player, mc.getRenderPartialTicks());
-            KamiTessellator.drawBoundingBox(iBlockState2.getSelectedBoundingBox(mc.world, this.renderBlock).offset(-interp2.x, -interp2.y, -interp2.z), width.getValue(), r, g, b, this.alpha.getValue());
+            CerealTessellator.drawBoundingBox(iBlockState2.getSelectedBoundingBox(mc.world, this.renderBlock).offset(-interp2.x, -interp2.y, -interp2.z), width.getValue(), r, g, b, this.alpha.getValue());
         } else {
             IBlockState iBlockState3 = mc.world.getBlockState(this.renderBlock);
             Vec3d interp3 = interpolateEntity(mc.player, mc.getRenderPartialTicks());
-            KamiTessellator.drawFullBox(iBlockState3.getSelectedBoundingBox(mc.world, this.renderBlock).offset(-interp3.x, -interp3.y, -interp3.z), this.renderBlock, width.getValue(), r, g, b, this.alpha.getValue());
+            CerealTessellator.drawFullBox(iBlockState3.getSelectedBoundingBox(mc.world, this.renderBlock).offset(-interp3.x, -interp3.y, -interp3.z), this.renderBlock, width.getValue(), r, g, b, this.alpha.getValue());
         }
-        KamiTessellator.release();
+        CerealTessellator.release();
     }
 
     @Override

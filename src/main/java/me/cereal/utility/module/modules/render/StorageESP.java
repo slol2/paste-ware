@@ -4,7 +4,7 @@ import me.cereal.utility.event.events.RenderEvent;
 import me.cereal.utility.module.Module;
 import me.cereal.utility.util.ColourUtils;
 import me.cereal.utility.util.GeometryMasks;
-import me.cereal.utility.util.KamiTessellator;
+import me.cereal.utility.util.CerealTessellator;
 import me.cereal.utility.util.Wrapper;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
@@ -74,10 +74,10 @@ public class StorageESP extends Module {
                 a.add(new Triplet<>(entity instanceof EntityItemFrame ? pos.add(0, -1, 0) : pos, color, GeometryMasks.Quad.ALL)); //GeometryTessellator.drawCuboid(event.getBuffer(), entity instanceof EntityItemFrame ? pos.add(0, -1, 0) : pos, GeometryMasks.Line.ALL, color);
         }
 
-        KamiTessellator.prepare(GL11.GL_QUADS);
+        CerealTessellator.prepare(GL11.GL_QUADS);
         for (Triplet<BlockPos, Integer, Integer> pair : a)
-            KamiTessellator.drawBox(pair.getFirst(), changeAlpha(pair.getSecond(), 100), pair.getThird());
-        KamiTessellator.release();
+            CerealTessellator.drawBox(pair.getFirst(), changeAlpha(pair.getSecond(), 100), pair.getThird());
+        CerealTessellator.release();
 
         GlStateManager.popMatrix();
         GlStateManager.enableTexture2D();
