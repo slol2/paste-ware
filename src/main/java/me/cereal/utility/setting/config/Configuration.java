@@ -1,7 +1,7 @@
 package me.cereal.utility.setting.config;
 
 import com.google.gson.*;
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 import me.cereal.utility.setting.Setting;
 import me.cereal.utility.setting.SettingsRegister;
 import me.cereal.utility.setting.converter.Convertable;
@@ -55,7 +55,7 @@ public class Configuration {
         try {
             loadConfiguration(new JsonParser().parse(new InputStreamReader(stream)).getAsJsonObject());
         } catch (IllegalStateException e) { // The JSON file is probably malformed.
-            KamiMod.log.error("KAMI Config malformed: resetting.");
+            CerealMod.log.error("Cereal Config malformed: resetting.");
             loadConfiguration(new JsonObject()); // Just reset it!
         }
     }

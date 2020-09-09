@@ -2,7 +2,7 @@ package me.cereal.utility.util;
 
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 import me.cereal.utility.event.events.PacketEvent;
 import net.minecraft.network.play.server.SPacketTimeUpdate;
 import net.minecraft.util.math.MathHelper;
@@ -26,7 +26,7 @@ public class LagCompensator implements EventListener {
     });
 
     public LagCompensator() {
-        KamiMod.EVENT_BUS.subscribe(this);
+        CerealMod.EVENT_BUS.subscribe(this);
         reset();
     }
 

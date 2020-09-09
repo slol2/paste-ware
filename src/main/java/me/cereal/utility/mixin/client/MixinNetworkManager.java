@@ -1,7 +1,7 @@
 package me.cereal.utility.mixin.client;
 
 import io.netty.channel.ChannelHandlerContext;
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 import me.cereal.utility.event.events.PacketEvent;
 import me.cereal.utility.module.modules.misc.NoPacketKick;
 import net.minecraft.network.NetworkManager;
@@ -22,7 +22,7 @@ public class MixinNetworkManager {
     @Inject(method = "sendPacket(Lnet/minecraft/network/Packet;)V", at = @At("HEAD"), cancellable = true)
     private void onSendPacket(Packet<?> packet, CallbackInfo callbackInfo) {
         PacketEvent event = new PacketEvent.Send(packet);
-        KamiMod.EVENT_BUS.post(event);
+        CerealMod.EVENT_BUS.post(event);
 
         if (event.isCancelled()) {
             callbackInfo.cancel();
@@ -32,7 +32,7 @@ public class MixinNetworkManager {
     @Inject(method = "channelRead0", at = @At("HEAD"), cancellable = true)
     private void onChannelRead(ChannelHandlerContext context, Packet<?> packet, CallbackInfo callbackInfo) {
         PacketEvent event = new PacketEvent.Receive(packet);
-        KamiMod.EVENT_BUS.post(event);
+        CerealMod.EVENT_BUS.post(event);
 
         if (event.isCancelled()) {
             callbackInfo.cancel();

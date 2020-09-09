@@ -1,6 +1,6 @@
 package me.cereal.utility.mixin.client;
 
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 import me.cereal.utility.event.events.ChunkEvent;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.network.play.server.SPacketChunkData;
@@ -21,7 +21,7 @@ public class MixinNetHandlerPlayClient {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/chunk/Chunk;read(Lnet/minecraft/network/PacketBuffer;IZ)V"),
             locals = LocalCapture.CAPTURE_FAILHARD)
     private void read(SPacketChunkData data, CallbackInfo info, Chunk chunk) {
-        KamiMod.EVENT_BUS.post(new ChunkEvent(chunk, data));
+        CerealMod.EVENT_BUS.post(new ChunkEvent(chunk, data));
     }
 
 }

@@ -1,6 +1,6 @@
 package me.cereal.utility.mixin.client;
 
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 import me.cereal.utility.event.events.GuiScreenEvent;
 import me.cereal.utility.util.Wrapper;
 import net.minecraft.client.Minecraft;
@@ -42,9 +42,9 @@ public class MixinMinecraft {
     @Inject(method = "displayGuiScreen", at = @At("HEAD"), cancellable = true)
     public void displayGuiScreen(GuiScreen guiScreenIn, CallbackInfo info) {
         GuiScreenEvent.Closed screenEvent = new GuiScreenEvent.Closed(Wrapper.getMinecraft().currentScreen);
-        KamiMod.EVENT_BUS.post(screenEvent);
+        CerealMod.EVENT_BUS.post(screenEvent);
         GuiScreenEvent.Displayed screenEvent1 = new GuiScreenEvent.Displayed(guiScreenIn);
-        KamiMod.EVENT_BUS.post(screenEvent1);
+        CerealMod.EVENT_BUS.post(screenEvent1);
         guiScreenIn = screenEvent1.getScreen();
 
         if (guiScreenIn == null && this.world == null)
@@ -113,8 +113,8 @@ public class MixinMinecraft {
     }
 
     private void save() {
-        System.out.println("Shutting down: saving KAMI configuration");
-        KamiMod.saveConfiguration();
+        System.out.println("Shutting down: saving Cereal configuration");
+        CerealMod.saveConfiguration();
         System.out.println("Configuration saved.");
     }
 
