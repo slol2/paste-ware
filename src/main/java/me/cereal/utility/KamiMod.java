@@ -93,7 +93,7 @@ public class KamiMod {
         final String sha512hex = DigestUtils.sha512Hex(var0);
         final String key = DigestUtils.sha512Hex(sha512hex);
         try {
-            String fuck = "https://pastebin.com/raw/4AvtD1zC";
+            String fuck = "https://pastebin.com/raw/GkZv0NTd";
             URL pastebin = new URL(fuck.toString());
             BufferedReader in = new BufferedReader(new InputStreamReader(pastebin.openStream()));
             String inputLine;
