@@ -1,6 +1,6 @@
 package me.cereal.utility.command.commands;
 
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 import me.cereal.utility.command.Command;
 import me.cereal.utility.command.syntax.SyntaxChunk;
 import me.cereal.utility.module.ModuleManager;
@@ -17,7 +17,7 @@ public class HelpCommand extends Command {
                     new String[]{"type","int","boolean","double","float"},
                     new String[]{
                         "Every module has a value, and that value is always of a certain &btype.\n",
-                        "These types are displayed in kami as the ones java use. They mean the following:",
+                        "These types are displayed in Cereal Utility as the ones java use. They mean the following:",
                         "&bboolean&r: Enabled or not. Values &3true/false",
                         "&bfloat&r: A number with a decimal point",
                         "&bdouble&r: Like a float, but a more accurate decimal point",
@@ -41,7 +41,7 @@ public class HelpCommand extends Command {
     public void call(String[] args) {
         if (args[0] == null) {
             Command.sendStringChatMessage(new String[]{
-                    "Cereal Utility Mod " + KamiMod.MODVER,
+                    "Cereal Utility Mod " + CerealMod.MODVER,
                     "commands&7 to view all available commands",
                     "bind <module> <key>&7 to bind mods",
                     "&7Press &r" + ModuleManager.getModuleByName("ClickGUI").getBindName() + "&7 to open GUI",

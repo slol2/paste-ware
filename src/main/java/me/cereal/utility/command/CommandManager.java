@@ -1,6 +1,6 @@
 package me.cereal.utility.command;
 
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 import me.cereal.utility.command.commands.BindCommand;
 import me.cereal.utility.util.ClassFinder;
 
@@ -28,7 +28,7 @@ public class CommandManager {
 				}
 			}
 		}
-		KamiMod.log.info("Commands initialised");
+		CerealMod.log.info("Commands initialised");
 	}
 
 	public void callCommand(String command){

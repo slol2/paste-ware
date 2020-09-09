@@ -1,11 +1,11 @@
 package me.cereal.utility.command.commands;
 
-import me.cereal.utility.KamiMod;
+import me.cereal.utility.CerealMod;
 import me.cereal.utility.command.Command;
 import me.cereal.utility.command.syntax.ChunkBuilder;
 import me.cereal.utility.command.syntax.parsers.DependantParser;
 import me.cereal.utility.command.syntax.parsers.EnumParser;
-import me.cereal.utility.gui.kami.KamiGUI;
+import me.cereal.utility.gui.cereal.CerealGUI;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -38,7 +38,7 @@ public class ConfigCommand extends Command {
                 break;
             case "save":
                 try {
-                    KamiMod.saveConfigurationUnsafe();
+                    CerealMod.saveConfigurationUnsafe();
                     Command.sendChatMessage("Saved configuration!");
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -47,15 +47,15 @@ public class ConfigCommand extends Command {
                 break;
             case "path":
                 if (args[1] == null) {
-                    Path file = Paths.get(KamiMod.getConfigName());
+                    Path file = Paths.get(CerealMod.getConfigName());
                     Command.sendChatMessage("Path to configuration: &b" + file.toAbsolutePath().toString());
                 } else {
                     String newPath = args[1];
-                    if (!KamiMod.isFilenameValid(newPath)) {
+                    if (!CerealMod.isFilenameValid(newPath)) {
                         Command.sendChatMessage("&b" + newPath + "&r is not a valid path");
                         break;
                     }
-                    try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("KAMILastConfig.txt"))) {
+                    try(BufferedWriter writer = Files.newBufferedWriter(Paths.get("CerealLastConfig.txt"))) {
                         writer.write(newPath);
                         reload();
                         Command.sendChatMessage("Configuration path set to &b" + newPath + "&r!");
@@ -73,9 +73,9 @@ public class ConfigCommand extends Command {
     }
 
     private void reload() {
-        KamiMod.getInstance().guiManager = new KamiGUI();
-        KamiMod.getInstance().guiManager.initializeGUI();
-        KamiMod.loadConfiguration();
+        CerealMod.getInstance().guiManager = new CerealGUI();
+        CerealMod.getInstance().guiManager.initializeGUI();
+        CerealMod.loadConfiguration();
         Command.sendChatMessage("Configuration reloaded!");
     }
 
