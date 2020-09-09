@@ -1,8 +1,5 @@
 package me.cereal.utility.module.modules.combat;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import me.cereal.utility.module.Module;
 import me.cereal.utility.module.Module.Info;
 import me.cereal.utility.setting.Setting;
@@ -19,34 +16,67 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 
 @Info(name = "AutoWeb", category = Module.Category.COMBAT)
 public class AutoWeb extends Module {
-    BlockPos head;
-    BlockPos feet;
-    private Setting<Integer> delay = this.register(Settings.integerBuilder("Delay").withRange(0, 10).withValue(3).build());
-    int d;
     public static EntityPlayer target;
     public static List<EntityPlayer> targets;
     public static float yaw;
     public static float pitch;
-
-    public boolean isInBlockRange(Entity target) {
-        return (target.getDistance(mc.player) <= 4.0F);
-    }
+    BlockPos head;
+    BlockPos feet;
+    int d;
+    private final Setting<Integer> delay = this.register(Settings.integerBuilder("Delay").withRange(0, 10).withValue(3).build());
 
     public static boolean canBeClicked(BlockPos pos) {
         return mc.world.getBlockState(pos).getBlock().canCollideCheck(mc.world.getBlockState(pos),
                 false);
     }
 
+    public static Block getBlock(BlockPos pos) {
+        return getState(pos).getBlock();
+    }
+
+    public static IBlockState getState(BlockPos pos) {
+        return mc.world.getBlockState(pos);
+    }
+
+    public static boolean placeBlockLegit(BlockPos pos) {
+        Vec3d eyesPos = new Vec3d(mc.player.posX,
+                mc.player.posY + mc.player.getEyeHeight(), mc.player.posZ);
+        Vec3d posVec = (new Vec3d(pos)).add(0.5D, 0.5D, 0.5D);
+        for (EnumFacing side : EnumFacing.values()) {
+            BlockPos neighbor = pos.offset(side);
+            if (canBeClicked(neighbor)) {
+                Vec3d hitVec = posVec.add((new Vec3d(side.getDirectionVec())).scale(0.5D));
+                if (eyesPos.squareDistanceTo(hitVec) <= 36.0D) {
+                    mc.playerController.processRightClickBlock(mc.player, mc.world, neighbor,
+                            side.getOpposite(), hitVec, EnumHand.MAIN_HAND);
+                    mc.player.swingArm(EnumHand.MAIN_HAND);
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(10L);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isInBlockRange(Entity target) {
+        return (target.getDistance(mc.player) <= 4.0F);
+    }
+
     public boolean isValid(EntityPlayer entity) {
         if (entity instanceof EntityPlayer) {
             EntityPlayer animal = entity;
-            if (isInBlockRange(animal) && animal.getHealth() > 0.0F && !animal.isDead
-                    && !animal.getName().startsWith("Body #") && !Friends.isFriend(animal.getName())) {
-                return true;
-            }
+            return isInBlockRange(animal) && animal.getHealth() > 0.0F && !animal.isDead
+                    && !animal.getName().startsWith("Body #") && !Friends.isFriend(animal.getName());
         }
         return false;
     }
@@ -76,39 +106,6 @@ public class AutoWeb extends Module {
             ItemStack stack = mc.player.inventoryContainer.getSlot(i).getStack();
             if (stack != null && isStackObby(stack)) {
                 return true;
-            }
-        }
-        return false;
-    }
-
-    public static Block getBlock(BlockPos pos) {
-        return getState(pos).getBlock();
-    }
-
-    public static IBlockState getState(BlockPos pos) {
-        return mc.world.getBlockState(pos);
-    }
-
-    public static boolean placeBlockLegit(BlockPos pos) {
-        Vec3d eyesPos = new Vec3d(mc.player.posX,
-                mc.player.posY + mc.player.getEyeHeight(), mc.player.posZ);
-        Vec3d posVec = (new Vec3d(pos)).add(0.5D, 0.5D, 0.5D);
-        for (EnumFacing side : EnumFacing.values()) {
-            BlockPos neighbor = pos.offset(side);
-            if (canBeClicked(neighbor)) {
-                Vec3d hitVec = posVec.add((new Vec3d(side.getDirectionVec())).scale(0.5D));
-                if (eyesPos.squareDistanceTo(hitVec) <= 36.0D) {
-                    mc.playerController.processRightClickBlock(mc.player, mc.world, neighbor,
-                            side.getOpposite(), hitVec, EnumHand.MAIN_HAND);
-                    mc.player.swingArm(EnumHand.MAIN_HAND);
-                    try {
-                        TimeUnit.MILLISECONDS.sleep(10L);
-                    }
-                    catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    return true;
-                }
             }
         }
         return false;
@@ -168,14 +165,11 @@ public class AutoWeb extends Module {
                     if (mc.world.getBlockState(this.head).getMaterial().isReplaceable()
                             || mc.world.getBlockState(this.feet).getMaterial().isReplaceable()) {
                         mc.player.inventory.currentItem = i - 36;
-                        if (player.moveForward == 0.0D || player.moveStrafing == 0.0D)
-                        {
+                        if (player.moveForward == 0.0D || player.moveStrafing == 0.0D) {
                             if (mc.world.getBlockState(this.head).getMaterial().isReplaceable()) {
                                 placeBlockLegit(this.head);
                             }
-                        }
-                        else
-                        {
+                        } else {
                             if (mc.world.getBlockState(this.head).getMaterial().isReplaceable()) {
                                 placeBlockLegit(this.head);
                             }

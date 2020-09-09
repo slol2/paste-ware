@@ -1,42 +1,37 @@
 package me.cereal.utility.module.modules.combat;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-
-
 import me.cereal.utility.command.Command;
 import me.cereal.utility.module.Module;
 import me.cereal.utility.setting.Setting;
 import me.cereal.utility.setting.Settings;
 import me.cereal.utility.util.BlockInteractionHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.Entity;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.ClickType;
+import net.minecraft.item.ItemBed;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.CPacketEntityAction;
 import net.minecraft.network.play.client.CPacketPlayerTryUseItemOnBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
-import net.minecraft.init.Items;
-import net.minecraft.item.*;
 
-@Module.Info(name="BedBomb", category=Module.Category.COMBAT)
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
+@Module.Info(name = "BedBomb", category = Module.Category.COMBAT)
 public class BedBomb extends Module {
 
     private static final DecimalFormat df = new DecimalFormat("#.#");
-    private Setting<Boolean> rotate = this.register(Settings.b("Rotate", false));
-    private Setting<Boolean> debugMessages = this.register(Settings.b("Debug Messages", false));
-    private Setting<Boolean> hotbarRefill = this.register(Settings.b("Refill Hotbar", true));
+    boolean moving = false;
+    private final Setting<Boolean> rotate = this.register(Settings.b("Rotate", false));
+    private final Setting<Boolean> debugMessages = this.register(Settings.b("Debug Messages", false));
+    private final Setting<Boolean> hotbarRefill = this.register(Settings.b("Refill Hotbar", true));
     private int stage;
     private BlockPos placeTarget;
     private int bedSlot;
     private boolean isSneaking;
-
-    boolean moving = false;
 
     @Override
     protected void onEnable() {
@@ -80,11 +75,11 @@ public class BedBomb extends Module {
         if (BedBomb.mc.player == null) return;
         if (this.stage == 0) {
             BedBomb.mc.player.inventory.currentItem = this.bedSlot;
-            this.placeBlock(new BlockPos((Vec3i) this.placeTarget), EnumFacing.DOWN);
+            this.placeBlock(new BlockPos(this.placeTarget), EnumFacing.DOWN);
 
-            BedBomb.mc.player.connection.sendPacket((Packet) new CPacketEntityAction((Entity) BedBomb.mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
+            BedBomb.mc.player.connection.sendPacket(new CPacketEntityAction(BedBomb.mc.player, CPacketEntityAction.Action.STOP_SNEAKING));
             this.isSneaking = false;
-            BedBomb.mc.player.connection.sendPacket((Packet) new CPacketPlayerTryUseItemOnBlock(this.placeTarget.add(0, 0, 0), EnumFacing.DOWN, EnumHand.MAIN_HAND, 0.0f, 0.0f, 0.0f));
+            BedBomb.mc.player.connection.sendPacket(new CPacketPlayerTryUseItemOnBlock(this.placeTarget.add(0, 0, 0), EnumFacing.DOWN, EnumHand.MAIN_HAND, 0.0f, 0.0f, 0.0f));
             this.stage = 1;
             return;
         }
@@ -108,10 +103,10 @@ public class BedBomb extends Module {
         BlockPos neighbour = pos.offset(side);
         EnumFacing opposite = side.getOpposite();
         if (!this.isSneaking) {
-            BedBomb.mc.player.connection.sendPacket((Packet)new CPacketEntityAction((Entity) BedBomb.mc.player, CPacketEntityAction.Action.START_SNEAKING));
+            BedBomb.mc.player.connection.sendPacket(new CPacketEntityAction(BedBomb.mc.player, CPacketEntityAction.Action.START_SNEAKING));
             this.isSneaking = true;
         }
-        Vec3d hitVec = new Vec3d((Vec3i)neighbour).add(0.5, 0.5, 0.5).add(new Vec3d(opposite.getDirectionVec()).scale(0.5));
+        Vec3d hitVec = new Vec3d(neighbour).add(0.5, 0.5, 0.5).add(new Vec3d(opposite.getDirectionVec()).scale(0.5));
         if (this.rotate.getValue().booleanValue()) {
             BlockInteractionHelper.faceVectorPacketInstant(hitVec);
         }

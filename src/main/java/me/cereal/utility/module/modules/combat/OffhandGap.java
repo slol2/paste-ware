@@ -11,12 +11,11 @@ import net.minecraft.item.ItemStack;
 
 @Module.Info(name = "OffHandGap", category = Module.Category.COMBAT)
 public class OffhandGap extends Module {
-    private Setting<Boolean> totem_disable = register(Settings.b("AutoTotem Disable", true));
-    private Setting<Double> Hearts = this.register(Settings.d("Health", 11.0));
-
     int gapples;
     boolean get_gapple = false;
     boolean get_move = false;
+    private final Setting<Boolean> totem_disable = register(Settings.b("AutoTotem Disable", true));
+    private final Setting<Double> Hearts = this.register(Settings.d("Health", 11.0));
 
     @Override
     public void onEnable() {
@@ -50,12 +49,12 @@ public class OffhandGap extends Module {
             mc.playerController.windowClick(0, t < 9 ? t + 36 : t, 0, ClickType.PICKUP, mc.player);
             get_gapple = false;
         }
-        if ((double)(OffhandGap.mc.player.getHealth() + OffhandGap.mc.player.getAbsorptionAmount()) <= this.Hearts.getValue()) {
+        if ((double) (OffhandGap.mc.player.getHealth() + OffhandGap.mc.player.getAbsorptionAmount()) <= this.Hearts.getValue()) {
             return;
         }
         gapples = mc.player.inventory.mainInventory.stream().filter(itemStack -> itemStack.getItem() == Items.GOLDEN_APPLE).mapToInt(ItemStack::getCount).sum();
 
-        if (mc.player.getHeldItemOffhand().getItem() == Items.GOLDEN_APPLE){
+        if (mc.player.getHeldItemOffhand().getItem() == Items.GOLDEN_APPLE) {
             return;
         } else {
             if (get_move) {

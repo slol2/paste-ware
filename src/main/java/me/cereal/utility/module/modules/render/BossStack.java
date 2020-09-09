@@ -22,10 +22,9 @@ import java.util.UUID;
 @Module.Info(name = "BossStack", description = "Modify the boss health GUI to take up less space", category = Module.Category.MISC)
 public class BossStack extends Module {
 
-    private static Setting<BossStackMode> mode = Settings.e("Mode", BossStackMode.STACK);
-    private static Setting<Double> scale = Settings.d("Scale", .5d);
-
     private static final ResourceLocation GUI_BARS_TEXTURES = new ResourceLocation("textures/gui/bars.png");
+    private static final Setting<BossStackMode> mode = Settings.e("Mode", BossStackMode.STACK);
+    private static final Setting<Double> scale = Settings.d("Scale", .5d);
 
     public BossStack() {
         registerAll(mode, scale);

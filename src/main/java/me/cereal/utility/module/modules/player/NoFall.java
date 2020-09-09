@@ -1,12 +1,12 @@
 package me.cereal.utility.module.modules.player;
 
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import me.cereal.utility.event.events.PacketEvent;
 import me.cereal.utility.module.Module;
 import me.cereal.utility.setting.Setting;
 import me.cereal.utility.setting.Settings;
 import me.cereal.utility.util.EntityUtil;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraft.init.Items;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.EnumHand;
@@ -19,18 +19,16 @@ import net.minecraft.util.math.Vec3d;
 @Module.Info(category = Module.Category.PLAYER, name = "NoFall")
 public class NoFall extends Module {
 
-    private Setting<Boolean> packet = register(Settings.b("Packet", false));
-    private Setting<Boolean> bucket = register(Settings.b("Bucket", true));
-    private Setting<Integer> distance = register(Settings.i("Distance", 15));
-
-    private long last = 0;
-
+    private final Setting<Boolean> packet = register(Settings.b("Packet", false));
     @EventHandler
     public Listener<PacketEvent.Send> sendListener = new Listener<>(event -> {
         if (event.getPacket() instanceof CPacketPlayer && packet.getValue()) {
             ((CPacketPlayer) event.getPacket()).onGround = true;
         }
     });
+    private final Setting<Boolean> bucket = register(Settings.b("Bucket", true));
+    private final Setting<Integer> distance = register(Settings.i("Distance", 15));
+    private long last = 0;
 
     @Override
     public void onUpdate() {

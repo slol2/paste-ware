@@ -7,7 +7,7 @@ import me.cereal.utility.setting.Settings;
 @Module.Info(name = "Custom FOV", category = Module.Category.RENDER)
 public class FOV extends Module {
 
-    private Setting<Float> FOV = this.register(Settings.floatBuilder("FOV").withMinimum(90.0f).withValue(110.0f).withMaximum(200.0f).build());
+    private final Setting<Float> FOV = this.register(Settings.floatBuilder("FOV").withMinimum(90.0f).withValue(110.0f).withMaximum(200.0f).build());
     private float fov;
 
     @Override

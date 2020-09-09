@@ -1,12 +1,12 @@
 package me.cereal.utility.module.modules.render;
 
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import me.cereal.utility.event.events.ChunkEvent;
 import me.cereal.utility.event.events.RenderEvent;
 import me.cereal.utility.module.Module;
 import me.cereal.utility.setting.Setting;
 import me.cereal.utility.setting.Settings;
+import me.zero.alpine.listener.EventHandler;
+import me.zero.alpine.listener.Listener;
 import net.minecraft.block.BlockPortal;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.Chunk;
@@ -17,14 +17,14 @@ import java.util.ArrayList;
 /**
  * Created by 086 on 15/12/2017.
  */
- @Module.Info(name = "PortalTracers", category = Module.Category.RENDER)
+@Module.Info(name = "PortalTracers", category = Module.Category.RENDER)
 public class PortalTracers extends Module {
 
-    private Setting<Integer> range = register(Settings.i("Range", 5000));
-    private ArrayList<BlockPos> portals = new ArrayList<>();
+    private final Setting<Integer> range = register(Settings.i("Range", 5000));
+    private final ArrayList<BlockPos> portals = new ArrayList<>();
 
     @EventHandler
-    private Listener<ChunkEvent> loadListener = new Listener<>(event -> {
+    private final Listener<ChunkEvent> loadListener = new Listener<>(event -> {
         Chunk chunk = event.getChunk();
         // Remove already registered portals from this chunk, allowing removed portals to vanish from tracers and no duplicates to be made
         portals.removeIf(blockPos -> blockPos.getX() / 16 == chunk.x && blockPos.getZ() / 16 == chunk.z);

@@ -1,5 +1,4 @@
 package me.cereal.utility.module.modules.combat;
-import java.util.concurrent.TimeUnit;
 
 import me.cereal.utility.command.Command;
 import me.cereal.utility.module.Module;
@@ -17,42 +16,26 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.concurrent.TimeUnit;
+
 // made by travsi :D
 
 @Info(name = "Self Web", category = Module.Category.COMBAT)
 public class SelfWeb extends Module {
-    BlockPos feet;
-    private Setting<Integer> delay = this.register(Settings.integerBuilder("Delay").withRange(0, 10).withValue(3).build());
-    int d;
     public static float yaw;
     public static float pitch;
-    private Setting<Boolean> announceUsage;
+    BlockPos feet;
+    int d;
+    private final Setting<Integer> delay = this.register(Settings.integerBuilder("Delay").withRange(0, 10).withValue(3).build());
+    private final Setting<Boolean> announceUsage;
 
     public SelfWeb() {
-        this.announceUsage =  this.register(Settings.b("Announce Usage", true));
-    }
-
-    public boolean isInBlockRange(Entity target) {
-        return (target.getDistance(mc.player) <= 4.0F);
+        this.announceUsage = this.register(Settings.b("Announce Usage", true));
     }
 
     public static boolean canBeClicked(BlockPos pos) {
         return mc.world.getBlockState(pos).getBlock().canCollideCheck(mc.world.getBlockState(pos),
                 false);
-    }
-
-    private boolean isStackObby(ItemStack stack) {
-        return (stack != null && stack.getItem() == Item.getItemById(30));
-    }
-
-    private boolean doesHotbarHaveWeb() {
-        for (int i = 36; i < 45; i++) {
-            ItemStack stack = mc.player.inventoryContainer.getSlot(i).getStack();
-            if (stack != null && isStackObby(stack)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public static Block getBlock(BlockPos pos) {
@@ -77,12 +60,33 @@ public class SelfWeb extends Module {
                     mc.player.swingArm(EnumHand.MAIN_HAND);
                     try {
                         TimeUnit.MILLISECONDS.sleep(10L);
-                    }
-                    catch (InterruptedException e) {
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     return true;
                 }
+            }
+        }
+        return false;
+    }
+
+    public static double roundToHalf(double d) {
+        return Math.round(d * 2.0D) / 2.0D;
+    }
+
+    public boolean isInBlockRange(Entity target) {
+        return (target.getDistance(mc.player) <= 4.0F);
+    }
+
+    private boolean isStackObby(ItemStack stack) {
+        return (stack != null && stack.getItem() == Item.getItemById(30));
+    }
+
+    private boolean doesHotbarHaveWeb() {
+        for (int i = 36; i < 45; i++) {
+            ItemStack stack = mc.player.inventoryContainer.getSlot(i).getStack();
+            if (stack != null && isStackObby(stack)) {
+                return true;
             }
         }
         return false;
@@ -93,10 +97,6 @@ public class SelfWeb extends Module {
             return;
         }
         trap(mc.player);
-    }
-
-    public static double roundToHalf(double d) {
-        return Math.round(d * 2.0D) / 2.0D;
     }
 
     public void onEnable() {

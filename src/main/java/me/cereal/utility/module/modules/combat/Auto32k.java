@@ -32,11 +32,11 @@ public class Auto32k extends Module {
 
     private static final DecimalFormat df = new DecimalFormat("#.#");
 
-    private Setting<Boolean> rotate = register(Settings.b("Rotate", true));
-    private Setting<Boolean> grabItem = register(Settings.b("Grab Item", true));
-    private Setting<Boolean> autoEnableHitAura = register(Settings.b("Auto enable Hit Aura", true));
-    private Setting<Boolean> HN = register(Settings.b("Disable Hopper Nuker", true));
-    private Setting<Boolean> debugMessages = register(Settings.b("Debug Messages", true));
+    private final Setting<Boolean> rotate = register(Settings.b("Rotate", true));
+    private final Setting<Boolean> grabItem = register(Settings.b("Grab Item", true));
+    private final Setting<Boolean> autoEnableHitAura = register(Settings.b("Auto enable Hit Aura", true));
+    private final Setting<Boolean> HN = register(Settings.b("Disable Hopper Nuker", true));
+    private final Setting<Boolean> debugMessages = register(Settings.b("Debug Messages", true));
 
     private int stage;
 

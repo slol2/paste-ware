@@ -1,19 +1,19 @@
-package me.cereal.utility.module.modules.combat;
+package me.zeroeightsix.kami.module.modules.combat;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import me.cereal.utility.command.Command;
-import me.cereal.utility.event.events.PacketEvent;
-import me.cereal.utility.event.events.RenderEvent;
-import me.cereal.utility.module.Module;
-import me.cereal.utility.module.ModuleManager;
-import me.cereal.utility.module.modules.chat.AutoGG;
-import me.cereal.utility.setting.Setting;
-import me.cereal.utility.setting.Settings;
-import me.cereal.utility.util.EntityUtil;
-import me.cereal.utility.util.Friends;
-import me.cereal.utility.util.KamiTessellator;
+import me.zeroeightsix.kami.command.Command;
+import me.zeroeightsix.kami.event.events.PacketEvent;
+import me.zeroeightsix.kami.event.events.RenderEvent;
+import me.zeroeightsix.kami.module.Module;
+import me.zeroeightsix.kami.module.ModuleManager;
+import me.zeroeightsix.kami.module.modules.chat.AutoGG;
+import me.zeroeightsix.kami.setting.Setting;
+import me.zeroeightsix.kami.setting.Settings;
+import me.zeroeightsix.kami.util.EntityUtil;
+import me.zeroeightsix.kami.util.Friends;
+import me.zeroeightsix.kami.util.KamiTessellator;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -40,9 +40,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-@Module.Info(name = "AutoCrystal", category = Module.Category.COMBAT)
+@Module.Info(name = "AutoCrystal", category = Module.Category.HIDDEN)
 public class AutoCrystal extends Module {
-
     private Setting<Boolean> place;
     private Setting<Boolean> raytrace;
     private Setting<Boolean> autoSwitch;
@@ -213,7 +212,7 @@ public class AutoCrystal extends Module {
             return;
         }
         if (lastTarget instanceof EntityPlayer && ModuleManager.getModuleByName("AutoGG").isEnabled()) {
-            final me.cereal.utility.module.modules.chat.AutoGG autogg = (AutoGG)ModuleManager.getModuleByName("AutoGG");
+            final me.zeroeightsix.kami.module.modules.chat.AutoGG autogg = (AutoGG)ModuleManager.getModuleByName("AutoGG");
             autogg.addTargetedPlayer(lastTarget.getName());
         }
         this.render = finalPos;
@@ -394,13 +393,13 @@ public class AutoCrystal extends Module {
     protected void onEnable() {
 
         if (this.alert.getValue() && AutoCrystal.mc.world != null) {
-            Command.sendChatMessage("\u00A7aAutoCrystal ON");
+            Command.sendRawChatMessage("\u00A7aAutoCrystal ON");
         }
     }
 
     public void onDisable() {
         if (this.alert.getValue() && AutoCrystal.mc.world != null) {
-            Command.sendChatMessage("\u00A7cAutoCrystal" + ChatFormatting.RED.toString() + "OFF");
+            Command.sendRawChatMessage("\u00A7cAutoCrystal" + ChatFormatting.RED.toString() + "OFF");
         }
         this.render = null;
         resetRotation();

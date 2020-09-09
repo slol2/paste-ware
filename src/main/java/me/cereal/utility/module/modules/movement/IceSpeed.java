@@ -12,7 +12,7 @@ import net.minecraft.init.Blocks;
 @Module.Info(name = "IceSpeed", description = "Ice Speed", category = Module.Category.MOVEMENT)
 public class IceSpeed extends Module {
 
-    private Setting<Float> slipperiness = register(Settings.floatBuilder("Slipperiness").withMinimum(0.2f).withValue(0.4f).withMaximum(1.0f).build());
+    private final Setting<Float> slipperiness = register(Settings.floatBuilder("Slipperiness").withMinimum(0.2f).withValue(0.4f).withMaximum(1.0f).build());
 
     @Override
     public void onUpdate() {

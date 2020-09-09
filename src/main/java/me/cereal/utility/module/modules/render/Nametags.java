@@ -33,14 +33,13 @@ import static org.lwjgl.opengl.GL11.*;
 @Module.Info(name = "Nametags", description = "Draws descriptive nametags above entities", category = Module.Category.RENDER)
 public class Nametags extends Module {
 
-    private Setting<Boolean> players = register(Settings.b("Players", true));
-    private Setting<Boolean> animals = register(Settings.b("Animals", false));
-    private Setting<Boolean> mobs = register(Settings.b("Mobs", false));
-    private Setting<Double> range = register(Settings.d("Range", 200));
-    private Setting<Float> scale = register(Settings.floatBuilder("Scale").withMinimum(.5f).withMaximum(10f).withValue(1f).build());
-    private Setting<Boolean> health = register(Settings.b("Health", true));
-
     RenderItem itemRenderer = mc.getRenderItem();
+    private final Setting<Boolean> players = register(Settings.b("Players", true));
+    private final Setting<Boolean> animals = register(Settings.b("Animals", false));
+    private final Setting<Boolean> mobs = register(Settings.b("Mobs", false));
+    private final Setting<Double> range = register(Settings.d("Range", 200));
+    private final Setting<Float> scale = register(Settings.floatBuilder("Scale").withMinimum(.5f).withMaximum(10f).withValue(1f).build());
+    private final Setting<Boolean> health = register(Settings.b("Health", true));
 
     @Override
     public void onWorldRender(RenderEvent event) {

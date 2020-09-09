@@ -34,13 +34,13 @@ import static me.cereal.utility.util.BlockInteractionHelper.faceVectorPacketInst
 @Module.Info(name = "Surround", category = Module.Category.COMBAT)
 public class Surround extends Module {
 
-    private Setting<Mode> mode = register(Settings.e("Mode", Mode.FULL));
-    private Setting<Boolean> triggerable = register(Settings.b("Triggerable", true));
-    private Setting<Integer> timeoutTicks = register(Settings.integerBuilder("TimeoutTicks").withMinimum(1).withValue(40).withMaximum(100).withVisibility(b -> triggerable.getValue()).build());
-    private Setting<Integer> blocksPerTick = register(Settings.integerBuilder("BlocksPerTick").withMinimum(1).withValue(4).withMaximum(9).build());
-    private Setting<Integer> tickDelay = register(Settings.integerBuilder("TickDelay").withMinimum(0).withValue(0).withMaximum(10).build());
-    private Setting<Boolean> rotate = register(Settings.b("Rotate", true));
-    private Setting<Boolean> infoMessage = register(Settings.b("InfoMessage", false));
+    private final Setting<Mode> mode = register(Settings.e("Mode", Mode.FULL));
+    private final Setting<Boolean> triggerable = register(Settings.b("Triggerable", true));
+    private final Setting<Integer> timeoutTicks = register(Settings.integerBuilder("TimeoutTicks").withMinimum(1).withValue(40).withMaximum(100).withVisibility(b -> triggerable.getValue()).build());
+    private final Setting<Integer> blocksPerTick = register(Settings.integerBuilder("BlocksPerTick").withMinimum(1).withValue(4).withMaximum(9).build());
+    private final Setting<Integer> tickDelay = register(Settings.integerBuilder("TickDelay").withMinimum(0).withValue(0).withMaximum(10).build());
+    private final Setting<Boolean> rotate = register(Settings.b("Rotate", true));
+    private final Setting<Boolean> infoMessage = register(Settings.b("InfoMessage", false));
 
     private int offsetStep = 0;
     private int delayStep = 0;

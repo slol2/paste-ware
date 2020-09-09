@@ -1,8 +1,8 @@
 package me.cereal.utility.module.modules.movement;
 
+import me.cereal.utility.module.Module;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import me.cereal.utility.module.Module;
 import net.minecraftforge.client.event.InputUpdateEvent;
 
 /**
@@ -12,7 +12,7 @@ import net.minecraftforge.client.event.InputUpdateEvent;
 public class NoSlow extends Module {
 
     @EventHandler
-    private Listener<InputUpdateEvent> eventListener = new Listener<>(event -> {
+    private final Listener<InputUpdateEvent> eventListener = new Listener<>(event -> {
         //
         // InputUpdateEvent is called just before the player is slowed down @see EntityPlayerSP.onLivingUpdate)
         // We'll abuse this fact, and multiply moveStrafe and moveForward by 5 to nullify the *0.2f hardcoded by mojang.

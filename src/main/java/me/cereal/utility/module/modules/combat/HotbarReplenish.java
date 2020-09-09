@@ -16,15 +16,14 @@ import java.util.Map;
 
 /**
  * Created by Hub
- *
  */
 
 
 @Module.Info(name = "HotbarReplenish", description = "Replenishes on items if you're low", category = Module.Category.COMBAT)
 public class HotbarReplenish extends Module {
 
-    private Setting<Integer> threshold = register(Settings.integerBuilder("Threshold").withMinimum(1).withValue(32).withMaximum(63).build());
-    private Setting<Integer> tickDelay = register(Settings.integerBuilder("TickDelay").withMinimum(1).withValue(2).withMaximum(10).build());
+    private final Setting<Integer> threshold = register(Settings.integerBuilder("Threshold").withMinimum(1).withValue(32).withMaximum(63).build());
+    private final Setting<Integer> tickDelay = register(Settings.integerBuilder("TickDelay").withMinimum(1).withValue(2).withMaximum(10).build());
 
     private int delayStep = 0;
 
@@ -214,9 +213,6 @@ public class HotbarReplenish extends Module {
         return true;
 
     }
-
-
-
 
 
 }

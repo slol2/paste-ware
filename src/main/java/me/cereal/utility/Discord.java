@@ -70,7 +70,7 @@ public class Discord {
         details = getIGN();
         state = getIP();
         presence.startTimestamp = System.currentTimeMillis() / 1000;
-        presence.state = "muncin on cereal";
+        presence.state = "aaaaaaaaaaaaaaaaaaaaaaaaa";
         presence.details = "discord.gg/2b2tshop";
 
     }

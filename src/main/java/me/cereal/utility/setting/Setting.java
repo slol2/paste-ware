@@ -10,6 +10,8 @@ import me.cereal.utility.setting.converter.Convertable;
  */
 public abstract class Setting<T> implements ISettingUnknown, Convertable<T> {
 
+    private boolean bval;
+
     String name;
 
     T value;
@@ -46,6 +48,14 @@ public abstract class Setting<T> implements ISettingUnknown, Convertable<T> {
     @Override
     public Class getValueClass() {
         return valueType;
+    }
+
+    public boolean getValBoolean(){
+        return this.bval;
+    }
+
+    public void setValBoolean(boolean in){
+        this.bval = in;
     }
 
     /**

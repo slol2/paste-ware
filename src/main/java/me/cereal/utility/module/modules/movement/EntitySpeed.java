@@ -18,14 +18,18 @@ import net.minecraft.world.chunk.EmptyChunk;
 @Module.Info(name = "EntitySpeed", category = Module.Category.MOVEMENT, description = "Abuse client-sided movement to shape sound barrier breaking rideables")
 public class EntitySpeed extends Module {
 
-    private Setting<Float> speed = register(Settings.f("Speed", 1));
-    private Setting<Boolean> antiStuck = register(Settings.b("AntiStuck"));
-    private Setting<Boolean> flight = register(Settings.b("Flight", false));
-    private Setting<Boolean> wobble = register(Settings.booleanBuilder("Wobble").withValue(true).withVisibility(b -> flight.getValue()).build());
-    private static Setting<Float> opacity = Settings.f("Boat opacity", .5f);
+    private static final Setting<Float> opacity = Settings.f("Boat opacity", .5f);
+    private final Setting<Float> speed = register(Settings.f("Speed", 1));
+    private final Setting<Boolean> antiStuck = register(Settings.b("AntiStuck"));
+    private final Setting<Boolean> flight = register(Settings.b("Flight", false));
+    private final Setting<Boolean> wobble = register(Settings.booleanBuilder("Wobble").withValue(true).withVisibility(b -> flight.getValue()).build());
 
     public EntitySpeed() {
         register(opacity);
+    }
+
+    public static float getOpacity() {
+        return opacity.getValue();
     }
 
     @Override
@@ -54,7 +58,7 @@ public class EntitySpeed extends Module {
 
         moveForward(entity, speed.getValue() * 3.8D);
 
-        if (entity instanceof EntityHorse){
+        if (entity instanceof EntityHorse) {
             entity.rotationYaw = mc.player.rotationYaw;
         }
     }
@@ -145,10 +149,6 @@ public class EntitySpeed extends Module {
 
     private boolean isBorderingChunk(Entity entity, double motX, double motZ) {
         return antiStuck.getValue() && mc.world.getChunk((int) (entity.posX + motX) >> 4, (int) (entity.posZ + motZ) >> 4) instanceof EmptyChunk;
-    }
-
-    public static float getOpacity() {
-        return opacity.getValue();
     }
 
 }
